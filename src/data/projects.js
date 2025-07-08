@@ -1,0 +1,6 @@
+export const projects = [ {
+    id: 1, name: "Yüksek Katlı Bina İnşaatı", description: "Modern mimari tasarımlarla yüksek katlı binalar inşa ediyoruz. Kalite ve güvenliği ön planda tutarak, şehirlerin siluetine değer katıyoruz.", img: "images/projeler-yuksekbina.jpg" }, {
+    id: 2, name: "Konut Projeleri", description: "Ailelerin konforu için tasarlanmış modern konut projeleri geliştiriyoruz. Estetik ve fonksiyonelliği bir araya getirerek, yaşam alanlarınıza değer katıyoruz.", img: "images/projeler-konutlar.jpg" }, {
+    id: 3, name: "Ticari Yapılar", description: "İş dünyasının ihtiyaçlarına uygun ticari yapılar inşa ediyoruz. Ofis binaları, alışveriş merkezleri ve sanayi tesisleri ile iş süreçlerinizi destekliyoruz.", img: "images/projeler-ticari.jpg" }, {
+    id: 4, name: "Altyapı Projeleri", description: "Şehirlerin altyapısını güçlendiren projeler geliştiriyoruz. Yol, köprü, tünel ve su yapıları gibi kritik altyapı projeleri ile yaşam kalitesini artırıyoruz.", img: "images/projeler-altyapi.jpg"
+} ]

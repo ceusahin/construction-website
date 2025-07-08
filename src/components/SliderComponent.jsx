@@ -50,14 +50,16 @@ const SliderComponent = () => {
               className="w-full h-[60vh] object-cover"
             />
             <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
-            <div className="absolute top-1/3 -translate-x-1/2 left-1/2 transform -translate-y-1/2 text-white text-center z-6 w-10/12">
-              <h1 className="text-[30px] font-bold mb-3">{slide.title}</h1>
-              <p className="text-[16px]">{slide.desc}</p>
+            <div className="absolute top-1/3 xl:top-1/2 -translate-x-1/2 left-1/2 transform -translate-y-1/2 text-white text-center z-6 w-10/12">
+              <h1 className="text-[30px] 2xl:text-[50px] font-bold mb-3">
+                {slide.title}
+              </h1>
+              <p className="text-[16px] 2xl:text-[30px]">{slide.desc}</p>
               <div className="flex justify-center mt-8 space-x-4">
-                <button className="text-[16px] font-semibold text-white border-2 border-white px-4 py-2rounded hover:bg-blue-600 transition">
+                <button className="text-[16px] font-semibold text-white border-2 border-white hover:border-blue-700 cursor-pointer px-4 py-2 2xl:px-16 2xl:py-4 2xl:text-[30px] rounded hover:bg-blue-600 transition">
                   Teklif Al
                 </button>
-                <button className="text-[16px] font-semibold text-white border-2 border-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                <button className="text-[16px] font-semibold text-white border-2 border-white hover:border-blue-700 cursor-pointer px-4 py-2 2xl:px-16 2xl:py-4 2xl:text-[30px] rounded hover:bg-blue-600 transition">
                   Projelerimiz
                 </button>
               </div>
