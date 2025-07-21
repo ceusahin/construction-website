@@ -1,6 +1,6 @@
 function AboutUsMainPage() {
   return (
-    <div className="mt-70 lg:mt-45 px-4 2xl:px-60 flex flex-col items-center justify-center text-center">
+    <div className="mt-70 2xl:mt-40 lg:mt-65 px-4 2xl:px-60 flex flex-col items-center justify-center text-center">
       <h1 className="text-[20px] font-medium text-[#747474] 2xl:text-[35px]">
         About Us
       </h1>

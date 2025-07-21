@@ -47,7 +47,7 @@ const SliderComponent = () => {
             <img
               src={slide.img}
               alt={slide.title}
-              className="w-full h-[60vh] object-cover"
+              className="w-full h-[91vh] object-cover"
             />
             <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
             <div className="absolute top-1/3 xl:top-1/2 -translate-x-1/2 left-1/2 transform -translate-y-1/2 text-white text-center z-6 w-10/12">

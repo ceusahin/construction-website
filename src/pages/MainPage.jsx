@@ -1,11 +1,11 @@
-import AboutUsMainPage from "../components/AboutUsMainPage";
-import ContactUs from "../components/ContactUs";
-import Experience from "../components/Experience";
-import OurServices from "../components/OurServices";
-import ProjectsMainPage from "../components/ProjectsMainPage";
-import SliderComponent from "../components/SliderComponent";
-import ContactForm from "../components/ContactForm";
-import CompanyInfo from "../components/CompanyInfo";
+import AboutUsMainPage from "../components/site/AboutUsMainPage";
+import ContactUs from "../components/site/ContactUs";
+import Experience from "../components/site/Experience";
+import OurServices from "../components/site/OurServices";
+import ProjectsMainPage from "../components/site/ProjectsMainPage";
+import SliderComponent from "../components/site/SliderComponent";
+import ContactForm from "../components/site/ContactForm";
+import CompanyInfo from "../components/site/CompanyInfo";
 import PageContent from "../layouts/PageContent";
 
 function MainPage() {
