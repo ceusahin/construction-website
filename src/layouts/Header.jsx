@@ -1,19 +1,38 @@
+import axios from "axios";
 import { Menu } from "lucide-react";
+import { useEffect, useState } from "react";
 
 function Header() {
+  const [logo, setLogo] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/construction/logo")
+      .then((res) => setLogo(res.data))
+      .catch(() => setLogo(null));
+  }, []);
+
   return (
-    <header>
-      <div className="header-mobile sm:hidden flex justify-between items-center px-12 py-5">
-        <div className="cursor-pointer">SİTE BAŞLIĞI</div>
-        <div>
-          <Menu className="cursor-pointer" />
-        </div>
+    <header className="flex items-center justify-around p-6">
+      <div className="flex items-center">
+        {logo && (
+          <img
+            src={logo.imageUrl}
+            alt="Site Logo"
+            className="w-16 h-16 object-cover rounded-full"
+          />
+        )}
+        <h1 className="text-xl font-bold ml-4">Construction Company</h1>
       </div>
-      <div className="header-desktop hidden sm:flex sm:justify-between sm:items-center sm:px-20 sm:py-8">
-        <nav>3 tane menü icon</nav>
-        <div>SİTE BAŞLIĞI</div>
-        <nav>3 tane menü icon</nav>
-      </div>
+      <ul className="flex space-x-6 gap-4 text-gray-700">
+        <li className="cursor-pointer hover:text-gray-950">Ana Sayfa</li>
+        <li className="cursor-pointer hover:text-gray-950">Hakkımızda</li>
+        <li className="cursor-pointer hover:text-gray-950">Hizmetlerimiz</li>
+        <li className="cursor-pointer hover:text-gray-950">Projelerimiz</li>
+        <li className="cursor-pointer hover:text-gray-950">Blog</li>
+        <li className="cursor-pointer hover:text-gray-950">Referanslar</li>
+        <li className="cursor-pointer hover:text-gray-950">İletişim</li>
+      </ul>
     </header>
   );
 }

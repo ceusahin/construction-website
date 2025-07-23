@@ -33,7 +33,7 @@ export default function DeleteImageForm() {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Galerideki Resimler</h2>
+      <h2 className="text-2xl font-bold mb-4">Galeri</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {images.map((img) => (
           <div

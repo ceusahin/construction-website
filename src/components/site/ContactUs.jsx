@@ -1,18 +1,51 @@
-import { Instagram, Facebook, Twitter } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  Instagram,
+  Facebook,
+  Twitter,
+  Linkedin,
+  MessageCircle,
+  X,
+} from "lucide-react";
 
-function ContactUs() {
+const iconMap = {
+  Facebook: Facebook,
+  Instagram: Instagram,
+  X: Twitter,
+  Whatsapp: MessageCircle,
+  Linkedin: Linkedin,
+};
+
+const ContactUs = () => {
+  const [active, setActive] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/construction/social-media")
+      .then((res) => {
+        setActive(res.data.filter((s) => s.visible));
+      });
+  }, []);
+
   return (
-    <div className="bg-blue-100 text-center pt-4 pb-18 px-4">
-      <h1 className="text-[24px] font-medium text-[#747474] mb-10">
-        Sosyal Medya
-      </h1>
-      <nav className="flex justify-center items-center gap-14 mt-4 text-4xl text-blue-400">
-        <Instagram size={50} />
-        <Facebook size={50} />
-        <Twitter size={50} />
-      </nav>
+    <div className="flex justify-center space-x-6 py-4 bg-gray-100">
+      {active.map((link) => {
+        const Icon = iconMap[link.platform];
+        return (
+          <a
+            key={link.platform}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition-colors"
+          >
+            {Icon && <Icon size={30} />}
+          </a>
+        );
+      })}
     </div>
   );
-}
+};
 
 export default ContactUs;

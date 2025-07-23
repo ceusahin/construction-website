@@ -1,7 +1,6 @@
 const menuItems = [
   { label: "Ana Sayfa", key: "anasayfa" },
   { label: "Site Yönetimi", key: "site-yonetimi" },
-  { label: "Sayfa Ayarları", key: "sayfa-ayarlari" },
   { label: "Kullanıcılar", key: "kullanicilar" },
   { label: "Galeri", key: "galeri" },
 ];

@@ -7,13 +7,14 @@ import GalleryViewer from "../components/admin/GalleryViewer";
 import DeleteImageForm from "../components/admin/DeleteImageForm";
 import HeaderLogo from "../components/admin/HeaderLogo";
 import FaviconLogo from "../components/admin/FaviconLogo";
+import FooterSettings from "../components/admin/FooterSettings";
+import SwitchOnOff from "../components/admin/SwitchOnOff";
+import SocialMediaSettings from "../components/admin/SocialMediaSettings";
 
 function Panel() {
   const [activePage, setActivePage] = useState("anasayfa");
   const [activeSiteSetting, setActiveSiteSetting] = useState("header-logo");
-  const [selectedPage, setSelectedPage] = useState("anasayfa");
   const [activeContentItem, setActiveContentItem] = useState("anasayfa-icerik");
-  //   const [showGallery, setShowGallery] = useState(false);
 
   const messages = [
     {
@@ -36,16 +37,9 @@ function Panel() {
   // Site Yönetimi alt menüleri
   const siteSettings = [
     { label: "Header Logo", key: "header-logo" },
-    { label: "Menü İsimleri", key: "menu-names" },
     { label: "Footer Ayarları", key: "footer-settings" },
     { label: "Sosyal Medya Bağlantıları", key: "social-media" },
     { label: "SEO Ayarları", key: "seo-settings" },
-  ];
-
-  const pageSettings = [
-    { label: "Genel Ayarlar", key: "general-settings" },
-    { label: "Banner Ayarları", key: "banner-settings" },
-    { label: "İçerik Ayarları", key: "content-settings" },
   ];
 
   const gallerySettings = [
@@ -57,16 +51,6 @@ function Panel() {
   const userSettings = [
     { label: "Kullanıcı Listesi", key: "user-list" },
     { label: "Kullanıcı Ekle", key: "add-user" },
-  ];
-
-  const pageList = [
-    { label: "Ana Sayfa", key: "anasayfa" },
-    { label: "Hakkımızda", key: "hakkimizda" },
-    { label: "Hizmetlerimiz", key: "hizmetlerimiz" },
-    { label: "Projelerimiz", key: "projelerimiz" },
-    { label: "Blog", key: "blog" },
-    { label: "Referanslar", key: "referanslar" },
-    { label: "İletişim", key: "iletisim" },
   ];
 
   return (
@@ -159,19 +143,24 @@ function Panel() {
                   </div>
                   <div>
                     {activeSiteSetting === "header-logo" && (
-                      <div className="flex flex-col gap-10">
-                        <HeaderLogo />
-                        <FaviconLogo />
+                      <div className="flex flex-col md:flex-row gap-20 mt-20">
+                        <div className="bg-white shadow-lg border-gray-400 border p-6 w-full md:w-1/3">
+                          <HeaderLogo />
+                        </div>
+                        <div className="bg-white shadow-lg border-gray-400 border p-6 w-full md:w-1/3">
+                          <FaviconLogo />
+                        </div>
                       </div>
                     )}
-                    {activeSiteSetting === "menu-names" && (
-                      <div>Menü İsimleri Ayarları Burada</div>
-                    )}
                     {activeSiteSetting === "footer-settings" && (
-                      <div>Footer Ayarları Burada</div>
+                      <div>
+                        <FooterSettings />
+                      </div>
                     )}
                     {activeSiteSetting === "social-media" && (
-                      <div>Sosyal Medya Bağlantıları Ayarları Burada</div>
+                      <div>
+                        <SocialMediaSettings />
+                      </div>
                     )}
                     {activeSiteSetting === "seo-settings" && (
                       <div>SEO Ayarları İçin Ayarlar Burada</div>
@@ -252,66 +241,6 @@ function Panel() {
                     )}
                     {activeSiteSetting === "add-user" && (
                       <div>Kullanıcı Ekle İçeriği Burada</div>
-                    )}
-                  </div>
-                </div>
-              )}
-              {activePage === "sayfa-ayarlari" && (
-                <div className="p-6 space-y-6">
-                  <div className="flex flex-row items-center gap-4">
-                    <h1 className="text-l font-light">Yönetim Paneli</h1>
-                    <span className="text-gray-500">/</span>
-                    <h1 className="text-xl font-bold text-gray-700">
-                      Sayfa Ayarları
-                    </h1>
-                  </div>
-                  {/* Sayfa seçimi */}
-                  <div className="flex gap-4 mb-8">
-                    {pageList.map((item) => (
-                      <button
-                        key={item.key}
-                        className={`px-4 py-2 rounded ${
-                          selectedPage === item.key
-                            ? "bg-yellow-400 text-gray-900 font-semibold"
-                            : "bg-gray-200 text-gray-700"
-                        }`}
-                        onClick={() => setSelectedPage(item.key)}
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                  {/* Alt ayar seçenekleri */}
-                  <div className="flex gap-4 mb-8">
-                    {pageSettings.map((item) => (
-                      <button
-                        key={item.key}
-                        className={`px-4 py-2 rounded ${
-                          activeSiteSetting === item.key
-                            ? "bg-yellow-400 text-gray-900 font-semibold"
-                            : "bg-gray-200 text-gray-700"
-                        }`}
-                        onClick={() => setActiveSiteSetting(item.key)}
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                  <div>
-                    {activeSiteSetting === "general-settings" && (
-                      <div>
-                        {selectedPage} için Genel Ayarlar İçeriği Burada
-                      </div>
-                    )}
-                    {activeSiteSetting === "banner-settings" && (
-                      <div>
-                        {selectedPage} için Banner Ayarları İçeriği Burada
-                      </div>
-                    )}
-                    {activeSiteSetting === "content-settings" && (
-                      <div>
-                        {selectedPage} için İçerik Ayarları İçeriği Burada
-                      </div>
                     )}
                   </div>
                 </div>

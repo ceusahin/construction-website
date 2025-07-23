@@ -1,40 +1,57 @@
-function Footer() {
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import FooterLastProjects from "../components/site/FooterLastProjects";
+import FooterAboutUs from "../components/site/FooterAboutUs";
+import FooterMenu from "../components/site/FooterMenu";
+import FooterSocialMedia from "../components/site/FooterSocialMedia";
+
+const Footer = () => {
+  const [visibleSections, setVisibleSections] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/construction/footer-settings")
+      .then((res) => {
+        const visibleKeys = res.data
+          .filter((s) => s.visible)
+          .map((s) => s.sectionKey);
+        setVisibleSections(visibleKeys);
+      })
+      .catch((err) => {
+        console.error("Footer ayarları alınamadı:", err);
+      });
+  }, []);
+
+  // Görünür bileşenleri bir diziye al
+  const renderedComponents = [];
+
+  if (visibleSections.includes("about"))
+    renderedComponents.push(<FooterAboutUs key="about" />);
+  if (visibleSections.includes("pages"))
+    renderedComponents.push(<FooterMenu key="pages" />);
+  if (visibleSections.includes("contact"))
+    renderedComponents.push(<FooterSocialMedia key="contact" />);
+  if (visibleSections.includes("projects"))
+    renderedComponents.push(<FooterLastProjects key="projects" />);
+
   return (
-    <footer className="bg-blue-500 px-4 py-12 text-white flex flex-col md:flex-row md:justify-around justify-between items-start gap-10">
-      <div className="flex flex-col gap-2">
-        <h1 className="font-extrabold pb-2 text-[20px]">Biz Kimiz?</h1>
-        <a href="" className="hover:text-gray-200">
-          Hakkımızda
-        </a>
-        <a href="">Faaliyet Alanlarımız</a>
-        <a href="">Değerlerimiz</a>
-        <a href="">Hikayemiz</a>
-        <a href="">Yönetim Kurulu</a>
-        <a href="">Kariyer</a>
-        <a href="">Bize Ulaşın</a>
+    <footer className="bg-gray-800 text-white py-10 text-center">
+      <div
+        className={`max-w-7xl mx-auto px-4 grid gap-40
+          ${renderedComponents.length === 1 ? "grid-cols-1" : ""}
+          ${renderedComponents.length === 2 ? "grid-cols-2" : ""}
+          ${renderedComponents.length === 3 ? "grid-cols-3" : ""}
+          ${renderedComponents.length === 4 ? "grid-cols-4" : ""}
+        `}
+      >
+        {renderedComponents}
       </div>
-      <div className="flex flex-col gap-2">
-        <h1 className="font-extrabold pb-2 text-[20px]">Sayfalar</h1>
-        <a href="" className="hover:text-gray-200">
-          Anasayfa
-        </a>
-        <a href="">Hakkımızda</a>
-        <a href="">Çalışma Alanlarımız</a>
-        <a href="">Projelerimiz</a>
-        <a href="">İletişim Formu</a>
-      </div>
-      <div className="flex flex-col gap-2">
-        <h1 className="font-extrabold pb-2 text-[20px]">Sosyal Medya</h1>
-        <a href="" className="hover:text-gray-200">
-          Facebook
-        </a>
-        <a href="">Instagram</a>
-        <a href="">Twitter</a>
-        <a href="">Linkedin</a>
-        <a href="">Kariyer.net</a>
+
+      <div className="mt-10 text-center text-sm text-gray-400">
+        © {new Date().getFullYear()} BDSM PRODUCTION. Tüm Hakları Saklıdır.
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;
