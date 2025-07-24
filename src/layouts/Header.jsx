@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
+import LanguageToggle from "../components/site/LanguageToggle";
 
 function Header() {
   const [logo, setLogo] = useState(null);
@@ -33,6 +34,7 @@ function Header() {
         <li className="cursor-pointer hover:text-gray-950">Referanslar</li>
         <li className="cursor-pointer hover:text-gray-950">İletişim</li>
       </ul>
+      <LanguageToggle />
     </header>
   );
 }

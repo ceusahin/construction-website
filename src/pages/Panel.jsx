@@ -10,6 +10,7 @@ import FaviconLogo from "../components/admin/FaviconLogo";
 import FooterSettings from "../components/admin/FooterSettings";
 import SocialMediaSettings from "../components/admin/SocialMediaSettings";
 import SeoSettings from "../components/admin/SeoSettings";
+import SliderSettings from "../components/admin/SliderSettings";
 
 function Panel() {
   const [activePage, setActivePage] = useState("anasayfa");
@@ -39,6 +40,12 @@ function Panel() {
     { label: "Footer Ayarları", key: "footer-settings" },
     { label: "Sosyal Medya Bağlantıları", key: "social-media" },
     { label: "SEO Ayarları", key: "seo-settings" },
+  ];
+
+  const mainPageContextSettings = [
+    { label: "Slider Ayarları", key: "context-slider" },
+    { label: "Tecrübe", key: "context-experience" },
+    { label: "Bize Ulaşın", key: "context-about" },
   ];
 
   const gallerySettings = [
@@ -81,7 +88,52 @@ function Panel() {
           {activeContentItem ? (
             <>
               {activeContentItem === "anasayfa-icerik" && (
-                <div>Ana Sayfa İçerik Ayarları Burada</div>
+                <div className="p-6 space-y-6">
+                  <div className="flex flex-row items-center gap-4">
+                    <h1 className="text-l font-light">Yönetim Paneli</h1>
+                    <span className="text-gray-500">/</span>
+                    <h1 className="text-xl font-bold text-gray-700">
+                      Site Yönetimi
+                    </h1>
+                  </div>
+                  <div className="flex gap-4 mb-8">
+                    {mainPageContextSettings.map((item) => (
+                      <button
+                        key={item.key}
+                        className={`px-4 py-2 rounded ${
+                          activeSiteSetting === item.key
+                            ? "bg-yellow-400 text-gray-900 font-semibold"
+                            : "bg-gray-200 text-gray-700"
+                        }`}
+                        onClick={() => setActiveSiteSetting(item.key)}
+                      >
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
+                  <div>
+                    {activeSiteSetting === "context-slider" && (
+                      <div className="flex flex-col md:flex-row gap-20 mt-20">
+                        <SliderSettings />
+                      </div>
+                    )}
+                    {activeSiteSetting === "footer-settings" && (
+                      <div>
+                        <FooterSettings />
+                      </div>
+                    )}
+                    {activeSiteSetting === "social-media" && (
+                      <div>
+                        <SocialMediaSettings />
+                      </div>
+                    )}
+                    {activeSiteSetting === "seo-settings" && (
+                      <div>
+                        <SeoSettings />
+                      </div>
+                    )}
+                  </div>
+                </div>
               )}
               {activeContentItem === "hakkimizda" && (
                 <div>Hakkımızda İçerik Ayarları Burada</div>

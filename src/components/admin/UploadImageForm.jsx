@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const UploadImageForm = () => {
+const UploadImageForm = ({ onUploadSuccess }) => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
@@ -31,6 +31,9 @@ const UploadImageForm = () => {
       );
       setUploadedUrl(response.data.imageUrl);
       setError("");
+      if (onUploadSuccess) {
+        onUploadSuccess(response.data.imageUrl);
+      }
     } catch (err) {
       console.error(err);
       setError("Yükleme başarısız: " + err.message);
