@@ -40,7 +40,7 @@ const ContactUs = () => {
             rel="noopener noreferrer"
             className="hover:text-blue-600 transition-colors"
           >
-            {Icon && <Icon size={30} />}
+            {Icon && <Icon size={75} />}
           </a>
         );
       })}

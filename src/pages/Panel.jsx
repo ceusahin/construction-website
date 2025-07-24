@@ -8,8 +8,8 @@ import DeleteImageForm from "../components/admin/DeleteImageForm";
 import HeaderLogo from "../components/admin/HeaderLogo";
 import FaviconLogo from "../components/admin/FaviconLogo";
 import FooterSettings from "../components/admin/FooterSettings";
-import SwitchOnOff from "../components/admin/SwitchOnOff";
 import SocialMediaSettings from "../components/admin/SocialMediaSettings";
+import SeoSettings from "../components/admin/SeoSettings";
 
 function Panel() {
   const [activePage, setActivePage] = useState("anasayfa");
@@ -34,7 +34,6 @@ function Panel() {
     { name: "AVM İnşaatı", startDate: "2025-06-15", status: "Tamamlandı" },
   ];
 
-  // Site Yönetimi alt menüleri
   const siteSettings = [
     { label: "Header Logo", key: "header-logo" },
     { label: "Footer Ayarları", key: "footer-settings" },
@@ -163,7 +162,9 @@ function Panel() {
                       </div>
                     )}
                     {activeSiteSetting === "seo-settings" && (
-                      <div>SEO Ayarları İçin Ayarlar Burada</div>
+                      <div>
+                        <SeoSettings />
+                      </div>
                     )}
                   </div>
                 </div>

@@ -24,7 +24,7 @@ function Header() {
         )}
         <h1 className="text-xl font-bold ml-4">Construction Company</h1>
       </div>
-      <ul className="flex space-x-6 gap-4 text-gray-700">
+      <ul className="flex space-x-6 gap-4 text-gray-700 text-xl">
         <li className="cursor-pointer hover:text-gray-950">Ana Sayfa</li>
         <li className="cursor-pointer hover:text-gray-950">Hakkımızda</li>
         <li className="cursor-pointer hover:text-gray-950">Hizmetlerimiz</li>

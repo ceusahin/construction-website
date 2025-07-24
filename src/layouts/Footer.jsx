@@ -22,7 +22,6 @@ const Footer = () => {
       });
   }, []);
 
-  // Görünür bileşenleri bir diziye al
   const renderedComponents = [];
 
   if (visibleSections.includes("about"))
@@ -48,7 +47,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-10 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} BDSM PRODUCTION. Tüm Hakları Saklıdır.
+        © {new Date().getFullYear()} BDSM DIGITAL. Tüm Hakları Saklıdır.
       </div>
     </footer>
   );

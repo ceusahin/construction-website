@@ -30,14 +30,23 @@ const SocialMediaSettings = () => {
       });
   };
 
+  const normalizeUrl = (url) => {
+    if (!url) return "";
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+      return url;
+    }
+    return `https://${url}`;
+  };
+
   const handleUrlChange = (platform, newUrl) => {
     const item = settings.find((s) => s.platform === platform);
+    const normalized = normalizeUrl(newUrl);
     axios
       .put(
         `http://localhost:8080/api/construction/social-media/${platform}`,
         null,
         {
-          params: { visible: item.visible, url: newUrl },
+          params: { visible: item.visible, url: normalized },
         }
       )
       .then((res) => {
@@ -52,6 +61,7 @@ const SocialMediaSettings = () => {
   return (
     <div className="space-y-4">
       <h2 className="text-lg font-bold">Sosyal Medya Ayarları</h2>
+      <p>URL adresini "https://(URL adresiniz)" şeklinde girin.</p>
       {settings.map((s) => (
         <div key={s.platform} className="flex items-center space-x-4">
           <span className="w-24 capitalize">{s.platform}</span>
