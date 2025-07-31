@@ -29,7 +29,7 @@ const ContactUs = () => {
   }, []);
 
   return (
-    <div className="flex justify-center space-x-6 py-4 bg-gray-100">
+    <div className="flex flex-wrap justify-center gap-8 pb-12 px-4 bg-blue-100">
       {active.map((link) => {
         const Icon = iconMap[link.platform];
         return (
@@ -39,8 +39,9 @@ const ContactUs = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-600 transition-colors"
+            aria-label={link.platform}
           >
-            {Icon && <Icon size={75} />}
+            {Icon && <Icon strokeWidth={1} size={48} />}
           </a>
         );
       })}

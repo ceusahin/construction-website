@@ -33,15 +33,20 @@ const Footer = () => {
   if (visibleSections.includes("projects"))
     renderedComponents.push(<FooterLastProjects key="projects" />);
 
+  // Dinamik grid kolon sayısını belirle
+  const gridColsClass =
+    renderedComponents.length === 1
+      ? "md:grid-cols-1"
+      : renderedComponents.length === 2
+      ? "md:grid-cols-2"
+      : renderedComponents.length === 3
+      ? "md:grid-cols-3"
+      : "md:grid-cols-4";
+
   return (
     <footer className="bg-gray-800 text-white py-10 text-center">
       <div
-        className={`max-w-7xl mx-auto px-4 grid gap-40
-          ${renderedComponents.length === 1 ? "grid-cols-1" : ""}
-          ${renderedComponents.length === 2 ? "grid-cols-2" : ""}
-          ${renderedComponents.length === 3 ? "grid-cols-3" : ""}
-          ${renderedComponents.length === 4 ? "grid-cols-4" : ""}
-        `}
+        className={`max-w-7xl mx-auto px-4 grid gap-10 grid-cols-1 sm:grid-cols-1 ${gridColsClass}`}
       >
         {renderedComponents}
       </div>

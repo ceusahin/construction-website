@@ -1,23 +1,32 @@
 import ProjectsMainPageCard from "./ProjectsMainPageCard";
+import MoreButton from "./MoreButton";
 
 function ProjectsMainPage() {
+  const moreButtonText = "Tüm Projelerimiz";
+
   return (
-    <div className="px-4 mt-14 2xl:px-60 flex flex-col items-center justify-center text-center">
-      <h1 className="text-[20px] font-medium text-[#747474] 2xl:text-[35px]">
-        Projelerimiz
-      </h1>
-      <div>
-        <h1 className="text-[30px] font-bold mt-2 2xl:text-[35px]">
-          Mükemmelliğe Adanmış İnşaat Projeleri
-        </h1>
-        <p className="text-[16px] text-[#747474] mt-2 2xl:text-[25px]">
-          15 yılı aşkın süredir, hayalleri gerçeğe dönüştüren üst düzey inşaat
-          hizmetleri sunuyoruz. Yenilik, hassasiyet ve sürdürülebilirliğe olan
-          bağlılığımızla, dünya genelinde 300'den fazla projeyi başarıyla
-          tamamladık.
-        </p>
+    <div>
+      <div className="px-4 mt-14 2xl:px-44 flex flex-col">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-10">
+          <div className="w-full md:w-auto">
+            <h1 className="text-lg md:text-xl text-gray-500 font-medium">
+              Projelerimiz
+            </h1>
+            <h2 className="text-2xl md:text-4xl font-bold mt-2">
+              Mükemmelliğe Adanmış İnşaat Projeleri
+            </h2>
+          </div>
+          <div className="flex flex-col items-start md:items-end gap-4 md:gap-10 w-full md:w-auto">
+            <p className="text-xs md:text-base text-[#747474] max-w-md md:max-w-lg">
+              Take a look at some of the outstanding work we’ve completed for
+              our clients.
+            </p>
+            <MoreButton text={moreButtonText} />
+          </div>
+        </div>
+
+        <ProjectsMainPageCard />
       </div>
-      <ProjectsMainPageCard />
     </div>
   );
 }

@@ -3,12 +3,14 @@ import "./App.css";
 import MainPage from "./pages/MainPage";
 import Panel from "./pages/Panel";
 import LanguageProvider from "./contexts/language/LanguageProvider";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
     <LanguageProvider>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/hakkimizda" element={<AboutUs />} />
         <Route path="/admin" element={<Panel />} />
       </Routes>
     </LanguageProvider>

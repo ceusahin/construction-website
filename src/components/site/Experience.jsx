@@ -1,24 +1,23 @@
 function Experience() {
   return (
-    <div className="absolute text-white top-2/4 mx-2 2xl:top-9/10 text-center flex flex-col gap-4 lg:gap-20 bg-blue-500 w-[96vw] 2xl:w-[50vw] lg:w-[90vw] lg:top-3/5 lg:h-[20vh] lg:mx-0 lg:right-1/16 2xl:right-1/4 lg:flex lg:flex-row lg:justify-center lg:items-center">
-      <div className="flex flex-col items-center justify-center mt-8 lg:m-0">
-        <h1 className="text-[30px] font-medium">500+</h1>
-        <p>Tamamlanan Projeler</p>
+    <div className="bg-blue-500 w-[73%] mx-auto rounded-lg shadow-lg px-4 py-6 md:px-8 md:py-14 flex flex-col gap-6 md:flex-row md:justify-around md:items-center text-white z-10 relative">
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl md:text-3xl font-semibold">500+</h1>
+        <p className="text-sm md:text-base">Tamamlanan Projeler</p>
       </div>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-[30px] font-medium">15+</h1>
-        <p>Yılların Tecrübesi</p>
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl md:text-3xl font-semibold">15+</h1>
+        <p className="text-sm md:text-base">Yılların Tecrübesi</p>
       </div>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-[30px] font-medium">98%</h1>
-        <p>Memnun Müşteriler</p>
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl md:text-3xl font-semibold">98%</h1>
+        <p className="text-sm md:text-base">Memnun Müşteriler</p>
       </div>
-      <div className="mb-8 lg:m-0 flex flex-col items-center justify-center">
-        <h1 className="text-[30px] font-medium">20+</h1>
-        <p>Hizmet Edilen Şehir</p>
+      <div className="flex flex-col items-center">
+        <h1 className="text-2xl md:text-3xl font-semibold">20+</h1>
+        <p className="text-sm md:text-base">Hizmet Edilen Şehir</p>
       </div>
     </div>
   );
 }
-
 export default Experience;

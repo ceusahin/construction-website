@@ -14,8 +14,12 @@ function MainPage() {
   return (
     <PageContent>
       <Header />
-      <SliderComponent />
-      <Experience />
+      <div className="relative z-0">
+        <SliderComponent />
+        <div className="-mt-34 sm:-mt-24 md:-mt-20">
+          <Experience />
+        </div>
+      </div>
       <AboutUsMainPage />
       <OurServices />
       <ProjectsMainPage />

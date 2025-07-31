@@ -11,6 +11,9 @@ import FooterSettings from "../components/admin/FooterSettings";
 import SocialMediaSettings from "../components/admin/SocialMediaSettings";
 import SeoSettings from "../components/admin/SeoSettings";
 import SliderSettings from "../components/admin/SliderSettings";
+import CompanyInfoSettings from "../components/admin/CompanyInfoSettings";
+import ExperienceSettings from "../components/admin/ExperienceSettings";
+import ContactInfoSettings from "../components/admin/ContactInfoSettings";
 
 function Panel() {
   const [activePage, setActivePage] = useState("anasayfa");
@@ -36,7 +39,7 @@ function Panel() {
   ];
 
   const siteSettings = [
-    { label: "Header Logo", key: "header-logo" },
+    { label: "Header Ayarları", key: "header-settings" },
     { label: "Footer Ayarları", key: "footer-settings" },
     { label: "Sosyal Medya Bağlantıları", key: "social-media" },
     { label: "SEO Ayarları", key: "seo-settings" },
@@ -45,7 +48,7 @@ function Panel() {
   const mainPageContextSettings = [
     { label: "Slider Ayarları", key: "context-slider" },
     { label: "Tecrübe", key: "context-experience" },
-    { label: "Bize Ulaşın", key: "context-about" },
+    { label: "Şirket Bilgi Ayarları", key: "context-about-company" },
   ];
 
   const gallerySettings = [
@@ -92,8 +95,10 @@ function Panel() {
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
                     <span className="text-gray-500">/</span>
+                    <h1 className="text-l font-light">İçerik Ayarları</h1>
+                    <span className="text-gray-500">/</span>
                     <h1 className="text-xl font-bold text-gray-700">
-                      Site Yönetimi
+                      Ana Sayfa
                     </h1>
                   </div>
                   <div className="flex gap-4 mb-8">
@@ -113,23 +118,18 @@ function Panel() {
                   </div>
                   <div>
                     {activeSiteSetting === "context-slider" && (
-                      <div className="flex flex-col md:flex-row gap-20 mt-20">
+                      <div>
                         <SliderSettings />
                       </div>
                     )}
-                    {activeSiteSetting === "footer-settings" && (
+                    {activeSiteSetting === "context-experience" && (
                       <div>
-                        <FooterSettings />
+                        <ExperienceSettings />
                       </div>
                     )}
-                    {activeSiteSetting === "social-media" && (
+                    {activeSiteSetting === "context-about-company" && (
                       <div>
-                        <SocialMediaSettings />
-                      </div>
-                    )}
-                    {activeSiteSetting === "seo-settings" && (
-                      <div>
-                        <SeoSettings />
+                        <ContactInfoSettings />
                       </div>
                     )}
                   </div>
@@ -193,13 +193,18 @@ function Panel() {
                     ))}
                   </div>
                   <div>
-                    {activeSiteSetting === "header-logo" && (
-                      <div className="flex flex-col md:flex-row gap-20 mt-20">
-                        <div className="bg-white shadow-lg border-gray-400 border p-6 w-full md:w-1/3">
-                          <HeaderLogo />
+                    {activeSiteSetting === "header-settings" && (
+                      <div className="flex flex-col gap-10 w-3/4">
+                        <div className="flex flex-col md:flex-row md:justify-between gap-20 mt-5">
+                          <div className="bg-white shadow-lg border-gray-400 border p-6 md:w-1/2">
+                            <HeaderLogo />
+                          </div>
+                          <div className="bg-white shadow-lg border-gray-400 border p-6 md:w-1/2">
+                            <FaviconLogo />
+                          </div>
                         </div>
-                        <div className="bg-white shadow-lg border-gray-400 border p-6 w-full md:w-1/3">
-                          <FaviconLogo />
+                        <div className="">
+                          <CompanyInfoSettings />
                         </div>
                       </div>
                     )}

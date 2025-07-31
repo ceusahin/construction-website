@@ -25,18 +25,6 @@ const SliderComponent = () => {
       title: "We Build the Future with Strength & Precision",
       desc: "Delivering top-notch construction solutions on time and within budget",
     },
-    // {
-    //   id: 3,
-    //   img: "/images/main-slider-3.png",
-    //   title: "Hemen İncele",
-    //   desc: "Yeni villalarımızı keşfedin",
-    // },
-    // {
-    //   id: 4,
-    //   img: "/images/main-slider-4.png",
-    //   title: "Yeni Ürünler",
-    //   desc: "En yeni projelerimiz burada!",
-    // },
   ];
 
   return (
@@ -47,19 +35,21 @@ const SliderComponent = () => {
             <img
               src={slide.img}
               alt={slide.title}
-              className="w-full h-[91vh] object-cover"
+              className="w-full h-[60vh] md:h-[80vh] xl:h-[91vh] object-cover"
             />
-            <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
-            <div className="absolute top-1/3 xl:top-1/2 -translate-x-1/2 left-1/2 transform -translate-y-1/2 text-white text-center z-6 w-10/12">
-              <h1 className="text-[30px] 2xl:text-[50px] font-bold mb-3">
+            <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+            <div className="absolute top-[36%] md:top-1/3 xl:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center z-20 w-11/12 sm:w-10/12">
+              <h1 className="text-lg sm:text-2xl md:text-3xl xl:text-5xl font-bold mb-3">
                 {slide.title}
               </h1>
-              <p className="text-[16px] 2xl:text-[30px]">{slide.desc}</p>
-              <div className="flex justify-center mt-8 space-x-4">
-                <button className="text-[16px] font-semibold text-white border-2 border-white hover:border-blue-700 cursor-pointer px-4 py-2 2xl:px-16 2xl:py-4 2xl:text-[30px] rounded hover:bg-blue-600 transition">
+              <p className="text-sm sm:text-base md:text-lg xl:text-2xl">
+                {slide.desc}
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center mt-6 gap-4">
+                <button className="text-sm sm:text-base font-semibold text-white border-2 border-white hover:border-blue-700 px-4 py-2 sm:px-6 sm:py-2 xl:px-12 xl:py-3 xl:text-xl rounded hover:bg-blue-600 transition">
                   Teklif Al
                 </button>
-                <button className="text-[16px] font-semibold text-white border-2 border-white hover:border-blue-700 cursor-pointer px-4 py-2 2xl:px-16 2xl:py-4 2xl:text-[30px] rounded hover:bg-blue-600 transition">
+                <button className="text-sm sm:text-base font-semibold text-white border-2 border-white hover:border-blue-700 px-4 py-2 sm:px-6 sm:py-2 xl:px-12 xl:py-3 xl:text-xl rounded hover:bg-blue-600 transition">
                   Projelerimiz
                 </button>
               </div>
