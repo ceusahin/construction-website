@@ -24,7 +24,7 @@ function AboutUsMainPage() {
               icon: (
                 <Construction
                   size={60}
-                  className="rounded-xl p-3 bg-blue-500 text-white"
+                  className="rounded-xl p-3 bg-[#101270] text-white"
                 />
               ),
               title: "Expert Team of Professionals",
@@ -34,7 +34,7 @@ function AboutUsMainPage() {
               icon: (
                 <Hammer
                   size={60}
-                  className="rounded-xl p-3 bg-blue-500 text-white"
+                  className="rounded-xl p-3 bg-[#101270] text-white"
                 />
               ),
               title: "Quality Tools & Equipment",
@@ -44,7 +44,7 @@ function AboutUsMainPage() {
               icon: (
                 <HardHat
                   size={60}
-                  className="rounded-xl p-3 bg-blue-500 text-white"
+                  className="rounded-xl p-3 bg-[#101270] text-white"
                 />
               ),
               title: "Safety First",

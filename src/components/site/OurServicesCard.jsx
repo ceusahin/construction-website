@@ -18,9 +18,9 @@ function OurServicesCard({ name, img, description }) {
       <div className="relative h-full px-6 pb-6 flex flex-col justify-end z-10 overflow-hidden">
         {/* Hizmet Başlığı */}
         <div
-          className="absolute z-20 xl:w-[500px] text-center group-hover:text-left transition-all duration-500
+          className="absolute z-20 xl:w-[500px] text-center transition-all duration-500
             top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-            group-hover:top-20 group-hover:left-69 group-hover:transform-none"
+            group-hover:top-30 group-hover:left-95 group-hover:transform-none"
         >
           <p className="text-2xl font-bold tracking-widest text-blue-300 group-hover:text-blue-700 drop-shadow-md transition-colors">
             Hizmet

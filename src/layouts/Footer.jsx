@@ -43,7 +43,7 @@ const Footer = () => {
       : "md:grid-cols-4";
 
   return (
-    <footer className="bg-gray-800 text-white py-10 text-center">
+    <footer className="bg-[#101270] text-white py-10 text-center">
       <div
         className={`max-w-7xl mx-auto px-4 grid gap-10 grid-cols-1 sm:grid-cols-1 ${gridColsClass}`}
       >

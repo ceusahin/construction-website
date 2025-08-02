@@ -3,7 +3,7 @@ import React from "react";
 const Button = ({ text }) => {
   return (
     <button className="relative inline-flex items-center justify-center px-11 py-3 overflow-hidden tracking-tighter text-white cursor-pointer bg-blue-600 rounded-md group">
-      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#101270] rounded-full group-hover:w-56 group-hover:h-56" />
+      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#101270] rounded-full group-hover:w-60 group-hover:h-56" />
       <span className="absolute bottom-0 left-0 h-full -ml-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
