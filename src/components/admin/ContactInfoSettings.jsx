@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const LANGUAGES = ["tr", "en"];
 const NEW_KEY = "new"; // null id için key
@@ -16,9 +16,7 @@ const ContactInfoSettings = () => {
   const fetchContactInfos = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/construction/contact-info"
-      );
+      const res = await axiosInstance.get("/contact-info");
       const dataArray = Array.isArray(res.data)
         ? res.data
         : res.data.data || [];
@@ -81,15 +79,9 @@ const ContactInfoSettings = () => {
   const handleSave = async (info) => {
     try {
       if (info.id) {
-        await axios.put(
-          `http://localhost:8080/api/construction/contact-info/${info.id}`,
-          info
-        );
+        await axiosInstance.put(`/contact-info/${info.id}`, info);
       } else {
-        await axios.post(
-          `http://localhost:8080/api/construction/contact-info`,
-          info
-        );
+        await axiosInstance.post(`/contact-info`, info);
       }
       alert("Kaydedildi");
       fetchContactInfos();
@@ -110,9 +102,7 @@ const ContactInfoSettings = () => {
       window.confirm("Bu iletişim bilgisini silmek istediğinize emin misiniz?")
     ) {
       try {
-        await axios.delete(
-          `http://localhost:8080/api/construction/contact-info/${info.id}`
-        );
+        await axiosInstance.delete(`/contact-info/${info.id}`);
         alert("Silindi");
         setContactInfos((prev) => prev.filter((item) => item.id !== info.id));
         // Aktif dil sekmesi ayarlarını da temizleyebilirsin istersen

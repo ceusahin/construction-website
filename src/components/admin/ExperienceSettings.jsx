@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const ExperienceSettings = () => {
   const [experiences, setExperiences] = useState([]);
@@ -11,9 +11,7 @@ const ExperienceSettings = () => {
 
   const fetchExperiences = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/construction/experience"
-      );
+      const res = await axiosInstance.get("/experience");
       setExperiences(res.data);
     } catch (err) {
       console.error("Veriler alınamadı", err);
@@ -44,9 +42,7 @@ const ExperienceSettings = () => {
       return;
     }
 
-    await axios.delete(
-      `http://localhost:8080/api/construction/experience/${id}`
-    );
+    await axiosInstance.delete(`/experience/${id}`);
     alert("Tecrübe silindi.");
     fetchExperiences();
   };
@@ -70,10 +66,7 @@ const ExperienceSettings = () => {
 
   const handleSave = async (exp) => {
     try {
-      await axios.post(
-        "http://localhost:8080/api/construction/experience",
-        exp
-      );
+      await axiosInstance.post("/experience", exp);
       alert("Tecrübe eklendi.");
 
       fetchExperiences();

@@ -1,5 +1,4 @@
 import AboutUsMainPage from "../components/site/AboutUsMainPage";
-import ContactUs from "../components/site/ContactUs";
 import Experience from "../components/site/Experience";
 import OurServices from "../components/site/OurServices";
 import ProjectsMainPage from "../components/site/ProjectsMainPage";
@@ -23,9 +22,14 @@ function MainPage() {
       <AboutUsMainPage />
       <OurServices />
       <ProjectsMainPage />
-      <ContactForm />
-      <CompanyInfo />
-      <ContactUs />
+      <div className="flex flex-col mt-14 pb-10 lg:flex-row justify-center items-center bg-blue-300">
+        <div className="w-full lg:w-1/2">
+          <ContactForm />
+        </div>
+        <div className="w-full lg:w-1/2">
+          <CompanyInfo />
+        </div>
+      </div>
       <Footer />
     </PageContent>
   );

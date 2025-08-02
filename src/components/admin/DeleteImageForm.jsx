@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 export default function DeleteImageForm() {
   const [images, setImages] = useState([]);
 
   const fetchImages = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/construction/gallery"
-      );
+      const res = await axiosInstance.get("/gallery");
       setImages(res.data);
     } catch (err) {
       console.error("Resimleri çekerken hata oluştu:", err);
@@ -18,9 +16,7 @@ export default function DeleteImageForm() {
   const handleDelete = async (id) => {
     if (!window.confirm("Bu resmi silmek istediğinize emin misiniz?")) return;
     try {
-      await axios.delete(
-        `http://localhost:8080/api/construction/gallery/${id}`
-      );
+      await axiosInstance.delete(`/gallery/${id}`);
       setImages(images.filter((img) => img.id !== id));
     } catch (err) {
       console.error("Silme sırasında hata oluştu:", err);

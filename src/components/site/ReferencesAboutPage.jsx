@@ -10,19 +10,23 @@ const References = () => {
   const references = [
     {
       name: "İstanbul Belediyesi",
-      iconUrl: "/images/projeler-yuksekbina.jpg",
+      iconUrl: "/images/logo-2.png",
     },
     {
       name: "XYZ Holding",
-      iconUrl: "/images/projeler-yuksekbina.jpg",
+      iconUrl: "/images/logo-bursa.jpg",
+    },
+    {
+      name: "ABC Holding",
+      iconUrl: "/images/logo-dogu.png",
     },
     {
       name: "Adana Holding",
-      iconUrl: null,
+      iconUrl: "/images/brsm-p-logo.png",
     },
     {
       name: "Gelişim İnşaat",
-      iconUrl: null,
+      iconUrl: "/images/brsm-siyah-logo.png",
     },
   ];
 
@@ -42,7 +46,7 @@ const References = () => {
               <img
                 src={ref.iconUrl}
                 alt={ref.name}
-                className="w-20 h-20 md:w-30 md:h-30 object-contain filter grayscale group-hover:grayscale-0 transition duration-300"
+                className="w-20 h-20 md:w-25 md:h-25 object-contain filter grayscale group-hover:grayscale-0 transition duration-300"
               />
             ) : (
               <span className="text-gray-800 text-sm md:text-base font-medium group-hover:text-blue-600 transition">

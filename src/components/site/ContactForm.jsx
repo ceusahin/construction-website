@@ -1,7 +1,7 @@
 function ContactForm() {
   return (
-    <section className="mt-20 px-4 py-14 bg-blue-100">
-      <div className="max-w-3xl mx-auto">
+    <section className="mt-14 mb-6 px-4">
+      <div className="max-w-2xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">Bize Ulaşın</h2>
         <p className="text-center text-gray-600 mb-8">
           Sorularınız, iş teklifleri veya iş birliği talepleriniz için bizimle
@@ -48,7 +48,7 @@ function ContactForm() {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-blue-400 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-md transition-all"
+              className="bg-blue-600 hover:bg-[#101270] cursor-pointer text-white font-semibold py-3 px-6 rounded-md transition-all"
             >
               Gönder
             </button>

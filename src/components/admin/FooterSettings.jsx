@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import SwitchOnOff from "./SwitchOnOff";
+import axiosInstance from "../../api/axiosInstance";
 
 // const sectionNames = {
 //   aboutUs: "Hakkımızda",
@@ -15,8 +15,8 @@ const FooterSettings = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/footer-settings")
+    axiosInstance
+      .get("/footer-settings")
       .then((res) => {
         setSettings(res.data);
         setLoading(false);
@@ -30,8 +30,8 @@ const FooterSettings = () => {
   const toggleVisibility = async (sectionKey) => {
     const current = settings.find((s) => s.sectionKey === sectionKey);
     try {
-      const res = await axios.put(
-        `http://localhost:8080/api/construction/footer-settings/${sectionKey}?visible=${!current.visible}`
+      const res = await axiosInstance.put(
+        `/footer-settings/${sectionKey}?visible=${!current.visible}`
       );
 
       setSettings((prev) =>

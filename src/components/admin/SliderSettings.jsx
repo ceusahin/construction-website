@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import useLanguage from "../../contexts/language/useLanguage";
+import axiosInstance from "../../api/axiosInstance";
 
 const SliderSettings = () => {
   const { language } = useLanguage();
@@ -17,9 +17,7 @@ const SliderSettings = () => {
   }, [language]);
 
   const fetchSliders = async (lang) => {
-    const res = await axios.get(
-      `http://localhost:8080/api/construction/slider/${lang}`
-    );
+    const res = await axiosInstance.get(`/slider/${lang}`);
     setSliders(res.data);
   };
 
@@ -62,10 +60,7 @@ const SliderSettings = () => {
       return;
     }
     try {
-      const res = await axios.post(
-        `http://localhost:8080/api/construction/slider`,
-        slider
-      );
+      const res = await axiosInstance.post(`/slider`, slider);
       const savedSlider = res.data;
       setSliders((prev) => prev.map((s) => (s === slider ? savedSlider : s)));
       setSelectedSliderIndex(sliders.findIndex((s) => s === slider)); // Kayıt sonrası seçili tut
@@ -81,10 +76,7 @@ const SliderSettings = () => {
       return;
     }
     try {
-      const res = await axios.put(
-        `http://localhost:8080/api/construction/slider/${slider.id}`,
-        slider
-      );
+      const res = await axiosInstance.put(`/slider/${slider.id}`, slider);
       const updatedSlider = res.data;
       setSliders((prev) => {
         const idx = prev.findIndex((s) => s.id === updatedSlider.id);
@@ -106,7 +98,7 @@ const SliderSettings = () => {
       alert("Henüz kaydedilmemiş bir slider silinemez.");
       return;
     }
-    await axios.delete(`http://localhost:8080/api/construction/slider/${id}`);
+    await axiosInstance.delete(`/slider/${id}`);
     fetchSliders(language);
     setSelectedSliderIndex(null);
   };
@@ -116,9 +108,7 @@ const SliderSettings = () => {
     setShowGallery(true);
     setGalleryLoading(true);
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/construction/gallery"
-      );
+      const res = await axiosInstance.get("/gallery");
       setGalleryImages(res.data);
     } catch (error) {
       console.error("Galeriden fotoğraf alınamadı", error);

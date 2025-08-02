@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const UploadImageForm = ({ onUploadSuccess }) => {
   const [title, setTitle] = useState("");
@@ -20,15 +20,11 @@ const UploadImageForm = ({ onUploadSuccess }) => {
     formData.append("title", title);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/construction/gallery",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axiosInstance.post("/gallery", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setUploadedUrl(response.data.imageUrl);
       setError("");
       if (onUploadSuccess) {

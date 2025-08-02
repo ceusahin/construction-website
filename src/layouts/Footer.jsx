@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import FooterLastProjects from "../components/site/FooterLastProjects";
 import FooterAboutUs from "../components/site/FooterAboutUs";
 import FooterMenu from "../components/site/FooterMenu";
 import FooterSocialMedia from "../components/site/FooterSocialMedia";
+import axiosInstance from "../api/axiosInstance";
 
 const Footer = () => {
   const [visibleSections, setVisibleSections] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/footer-settings")
+    axiosInstance
+      .get("/footer-settings")
       .then((res) => {
         const visibleKeys = res.data
           .filter((s) => s.visible)
@@ -33,7 +33,6 @@ const Footer = () => {
   if (visibleSections.includes("projects"))
     renderedComponents.push(<FooterLastProjects key="projects" />);
 
-  // Dinamik grid kolon sayısını belirle
   const gridColsClass =
     renderedComponents.length === 1
       ? "md:grid-cols-1"

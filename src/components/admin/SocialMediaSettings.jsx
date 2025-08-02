@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import SwitchOnOff from "./SwitchOnOff";
+import axiosInstance from "../../api/axiosInstance";
 
 const SocialMediaSettings = () => {
   const [settings, setSettings] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/social-media")
-      .then((res) => setSettings(res.data));
+    axiosInstance.get("/social-media").then((res) => setSettings(res.data));
   }, []);
 
   const handleToggle = (platform) => {
     const item = settings.find((s) => s.platform === platform);
-    axios
-      .put(
-        `http://localhost:8080/api/construction/social-media/${platform}`,
-        null,
-        {
-          params: { visible: !item.visible, url: item.url || "" },
-        }
-      )
+    axiosInstance
+      .put(`/social-media/${platform}`, null, {
+        params: { visible: !item.visible, url: item.url || "" },
+      })
       .then((res) => {
         setSettings((prev) =>
           prev.map((s) =>
@@ -41,14 +35,10 @@ const SocialMediaSettings = () => {
   const handleUrlChange = (platform, newUrl) => {
     const item = settings.find((s) => s.platform === platform);
     const normalized = normalizeUrl(newUrl);
-    axios
-      .put(
-        `http://localhost:8080/api/construction/social-media/${platform}`,
-        null,
-        {
-          params: { visible: item.visible, url: normalized },
-        }
-      )
+    axiosInstance
+      .put(`/social-media/${platform}`, null, {
+        params: { visible: item.visible, url: normalized },
+      })
       .then((res) => {
         setSettings((prev) =>
           prev.map((s) =>

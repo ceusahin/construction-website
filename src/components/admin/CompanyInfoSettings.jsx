@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const CompanyInfoSettings = () => {
   const [companyName, setCompanyName] = useState("");
@@ -11,8 +11,8 @@ const CompanyInfoSettings = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`http://localhost:8080/api/construction/company/${companyId}`)
+    axiosInstance
+      .get(`/company/${companyId}`)
       .then((res) => {
         setCompanyName(res.data.companyName);
         setCompanyDescription(res.data.companyDescription || "");
@@ -25,8 +25,8 @@ const CompanyInfoSettings = () => {
 
   const handleSave = () => {
     setLoading(true);
-    axios
-      .put(`http://localhost:8080/api/construction/company/${companyId}`, {
+    axiosInstance
+      .put(`/company/${companyId}`, {
         companyName,
         companyDescription,
       })

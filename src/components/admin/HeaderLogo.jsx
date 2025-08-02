@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const HeaderLogo = () => {
   const [logo, setLogo] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/logo")
+    axiosInstance
+      .get("/logo")
       .then((res) => setLogo(res.data))
       .catch(() => setLogo(null));
   }, []);
@@ -19,16 +19,16 @@ const HeaderLogo = () => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
 
-    axios
-      .post("http://localhost:8080/api/construction/logo", formData)
+    axiosInstance
+      .post("/logo", formData)
       .then((res) => setLogo(res.data))
       .catch(() => alert("Logo yüklenirken hata oluştu"))
       .finally(() => setLoading(false));
   };
 
   const clearLogo = () => {
-    axios
-      .delete("http://localhost:8080/api/construction/logo")
+    axiosInstance
+      .delete("/logo")
       .then(() => setLogo(null))
       .catch(() => alert("Logo kaldırılırken hata oluştu"));
   };

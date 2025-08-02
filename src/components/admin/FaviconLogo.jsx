@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const FaviconLogo = () => {
   const [favicon, setFavicon] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/favicon")
+    axiosInstance
+      .get("/favicon")
       .then((res) => setFavicon(res.data))
       .catch(() => setFavicon(null));
   }, []);
@@ -30,16 +30,16 @@ const FaviconLogo = () => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
 
-    axios
-      .post("http://localhost:8080/api/construction/favicon", formData)
+    axiosInstance
+      .post("/favicon", formData)
       .then((res) => setFavicon(res.data))
       .catch(() => alert("Favicon yüklenirken hata oluştu"))
       .finally(() => setLoading(false));
   };
 
   const clearFavicon = () => {
-    axios
-      .delete("http://localhost:8080/api/construction/favicon")
+    axiosInstance
+      .delete("/favicon")
       .then(() => setFavicon(null))
       .catch(() => alert("Favicon kaldırılırken hata oluştu"));
   };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const GalleryViewer = () => {
   const [images, setImages] = useState([]);
@@ -7,8 +7,8 @@ const GalleryViewer = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/gallery")
+    axiosInstance
+      .get("/gallery")
       .then((res) => {
         setImages(res.data);
         setLoading(false);

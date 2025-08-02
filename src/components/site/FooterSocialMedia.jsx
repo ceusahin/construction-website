@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const FooterSocialMedia = () => {
   const [activeLinks, setActiveLinks] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/social-media")
-      .then((res) => {
-        setActiveLinks(res.data.filter((s) => s.visible));
-      });
+    axiosInstance.get("/social-media").then((res) => {
+      setActiveLinks(res.data.filter((s) => s.visible));
+    });
   }, []);
 
   return (

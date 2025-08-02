@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const SeoSettings = () => {
   const [seo, setSeo] = useState({
@@ -9,9 +9,7 @@ const SeoSettings = () => {
   });
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/construction/seo")
-      .then((res) => setSeo(res.data));
+    axiosInstance.get("/seo").then((res) => setSeo(res.data));
   }, []);
 
   const handleChange = (e) => {
@@ -20,7 +18,7 @@ const SeoSettings = () => {
   };
 
   const handleSave = () => {
-    axios.put("http://localhost:8080/api/construction/seo", seo).then((res) => {
+    axiosInstance.put("/seo", seo).then((res) => {
       alert("SEO bilgileri güncellendi!" + res.data);
     });
   };

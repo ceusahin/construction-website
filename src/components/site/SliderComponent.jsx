@@ -28,7 +28,7 @@ const SliderComponent = () => {
   ];
 
   return (
-    <div className="overflow-x-hidden relative">
+    <div className="overflow-x-hidden relative mt-22">
       <Slider {...settings}>
         {slides.map((slide) => (
           <div key={slide.id} className="relative">
@@ -46,11 +46,13 @@ const SliderComponent = () => {
                 {slide.desc}
               </p>
               <div className="flex flex-col sm:flex-row justify-center mt-6 gap-4">
-                <button className="text-sm sm:text-base font-semibold text-white border-2 border-white hover:border-blue-700 px-4 py-2 sm:px-6 sm:py-2 xl:px-12 xl:py-3 xl:text-xl rounded hover:bg-blue-600 transition">
-                  Teklif Al
+                <button className="relative overflow-hidden group text-sm sm:text-base font-semibold text-white border-2 border-white px-4 py-2 sm:px-6 sm:py-2 xl:px-12 xl:py-3 xl:text-xl rounded cursor-pointer transition">
+                  <span className="absolute left-0 top-0 h-full w-0 bg-[#101270cc] transition-[width] duration-500 ease-in-out group-hover:w-full"></span>
+                  <span className="relative z-10">Teklif Al</span>
                 </button>
-                <button className="text-sm sm:text-base font-semibold text-white border-2 border-white hover:border-blue-700 px-4 py-2 sm:px-6 sm:py-2 xl:px-12 xl:py-3 xl:text-xl rounded hover:bg-blue-600 transition">
-                  Projelerimiz
+                <button className="relative overflow-hidden group text-sm sm:text-base font-semibold text-white border-2 border-white px-4 py-2 sm:px-6 sm:py-2 xl:px-12 xl:py-3 xl:text-xl rounded cursor-pointer transition">
+                  <span className="absolute left-0 top-0 h-full w-0 bg-[#101270cc]  transition-[width] duration-500 ease-in-out group-hover:w-full"></span>
+                  <span className="relative z-10">Projelerimiz</span>
                 </button>
               </div>
             </div>
