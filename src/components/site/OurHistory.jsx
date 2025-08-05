@@ -17,12 +17,6 @@ function OurHistory() {
           is built on a foundation of trust, collaboration, and a relentless
           pursuit of excellence.
         </p>
-        <p></p>
-        <p className="text-sm md:text-base text-black mt-3">
-          Every project reflects the passion for turning visions into reality,
-          ensuring quality at every step. The goal remains to continue shaping
-          spaces that inspire and stand the test of time.
-        </p>
       </div>
 
       {/* Sağ taraf: Fotoğraf / video kutuları */}

@@ -1,7 +1,7 @@
 function ServiceCardServicePage({ title, description, img }) {
   return (
-    <div className="bg-white border border-gray-200 shadow-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col justify-between">
-      <div className="relative h-40 w-full">
+    <div className="bg-white border w-126 border-gray-200 shadow-md rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col justify-between">
+      <div className="relative h-60 w-full">
         <img
           src={img}
           alt={title}

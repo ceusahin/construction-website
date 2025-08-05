@@ -49,7 +49,7 @@ const SocialMediaSettings = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6">
       <h2 className="text-lg font-bold">Sosyal Medya Ayarları</h2>
       <p>URL adresini "https://(URL adresiniz)" şeklinde girin.</p>
       {settings.map((s) => (

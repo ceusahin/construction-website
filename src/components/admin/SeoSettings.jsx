@@ -24,8 +24,11 @@ const SeoSettings = () => {
   };
 
   return (
-    <div className="space-y-4 w-1/2">
+    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6">
       <h2 className="text-xl font-bold">SEO Ayarları</h2>
+      <label className="font-medium text-l text-gray-700">
+        Başlık (Şirket ismi geçmeli, 50-60 karakter arası ideal)
+      </label>
       <input
         type="text"
         name="title"
@@ -34,7 +37,9 @@ const SeoSettings = () => {
         placeholder="Title"
         className="border p-2 w-full rounded"
       />
-
+      <label className="font-medium text-l text-gray-700">
+        Açıklama (120-150 karakter arası ideal)
+      </label>
       <textarea
         name="description"
         value={seo.description}
@@ -42,7 +47,9 @@ const SeoSettings = () => {
         placeholder="Description"
         className="border p-2 w-full rounded"
       />
-
+      <label className="font-medium text-l text-gray-700">
+        Keywords (Virgülle ayırın, 15-20 kelime arası ideal)
+      </label>
       <input
         type="text"
         name="keywords"
@@ -51,7 +58,6 @@ const SeoSettings = () => {
         placeholder="Keywords (virgülle ayır)"
         className="border p-2 w-full rounded"
       />
-
       <button
         onClick={handleSave}
         className="bg-blue-600 text-white px-4 py-2 rounded"

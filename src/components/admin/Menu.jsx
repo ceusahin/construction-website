@@ -1,8 +1,9 @@
+import LanguageSelector from "./LanguageSelector";
+
 const menuItems = [
   { label: "Ana Sayfa", key: "anasayfa" },
   { label: "Site Yönetimi", key: "site-yonetimi" },
   { label: "Kullanıcılar", key: "kullanicilar" },
-  { label: "Galeri", key: "galeri" },
 ];
 
 const contentItems = [
@@ -20,6 +21,7 @@ const Menu = ({ onSelect }) => (
     <div className="text-xl font-bold tracking-wide text-center">
       YÖNETİM PANELİ
     </div>
+    <LanguageSelector />
     <ul className="flex flex-col gap-4">
       <h3 className="px-2 py-4 text-s text-yellow-400">Menü</h3>
       {menuItems.map((item) => (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useLanguage from "../../contexts/language/useLanguage";
+import useLanguage from "../../contexts/useLanguage";
 import axiosInstance from "../../api/axiosInstance";
 
 const SliderSettings = () => {
@@ -18,6 +18,7 @@ const SliderSettings = () => {
 
   const fetchSliders = async (lang) => {
     const res = await axiosInstance.get(`/slider/${lang}`);
+    console.log("Sliders fetched:", res.data);
     setSliders(res.data);
   };
 
