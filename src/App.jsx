@@ -5,6 +5,10 @@ import Panel from "./pages/Panel";
 import AboutUs from "./pages/AboutUs";
 import ServicePage from "./pages/ServicePage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
+import BlogPage from "./pages/BlogPage";
+import ReferencesPage from "./pages/ReferencesPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
@@ -13,6 +17,10 @@ function App() {
       <Route path="/hakkimizda" element={<AboutUs />} />
       <Route path="/hizmetlerimiz" element={<ServicePage />} />
       <Route path="/projelerimiz" element={<ProjectsPage />} />
+      <Route path="/projelerimiz/:id" element={<ProjectDetailPage />} />
+      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/referanslarimiz" element={<ReferencesPage />} />
+      <Route path="/iletisim" element={<ContactPage />} />
       <Route path="/admin" element={<Panel />} />
     </Routes>
   );

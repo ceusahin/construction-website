@@ -24,7 +24,7 @@ const SeoSettings = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6">
+    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6 w-2/3">
       <h2 className="text-xl font-bold">SEO Ayarları</h2>
       <label className="font-medium text-l text-gray-700">
         Başlık (Şirket ismi geçmeli, 50-60 karakter arası ideal)

@@ -8,6 +8,7 @@ import CompanyInfo from "../components/site/CompanyInfo";
 import PageContent from "../layouts/PageContent";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
+import References from "../components/site/ReferencesAboutPage";
 
 function MainPage() {
   return (
@@ -20,9 +21,10 @@ function MainPage() {
         </div>
       </div>
       <AboutUsMainPage />
+      <References />
       <OurServices />
       <ProjectsMainPage />
-      <div className="flex flex-col mt-14 pb-10 lg:flex-row justify-center items-center bg-blue-300">
+      <div className="flex flex-col mt-14 px-20 pb-10 lg:flex-row justify-center items-center bg-blue-300">
         <div className="w-full lg:w-1/2">
           <ContactForm />
         </div>

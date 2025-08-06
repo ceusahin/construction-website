@@ -45,7 +45,7 @@ const CompanyInfoSettings = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg border-gray-400 border">
+    <div className="p-4 bg-white shadow-lg border-gray-400 border w-2/3">
       <h2 className="text-xl font-bold mb-4">
         Şirket Bilgileri Ayarları (
         {language?.toUpperCase() || "Dil seçili değil"})

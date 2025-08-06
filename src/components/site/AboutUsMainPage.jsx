@@ -3,15 +3,14 @@ import { Construction, Hammer, HardHat } from "lucide-react";
 function AboutUsMainPage() {
   return (
     <div className="mt-12 md:mt-20 px-4 md:px-8 xl:mx-36 flex flex-col lg:flex-row gap-12">
-      {/* Sol taraf: Metinler ve ikonlu maddeler */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center items-start">
-        <h1 className="text-base md:text-lg font-medium text-[#747474]">
+        <h1 className="text-base md:text-2xl font-medium text-[#747474]">
           About Us
         </h1>
-        <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold mt-2">
+        <h2 className="text-2xl md:text-4xl xl:text-5xl font-bold mt-2">
           Committed to Excellence in Construction
         </h2>
-        <p className="text-sm md:text-base text-[#747474] mt-3">
+        <p className="text-m md:text-xl text-[#747474] mt-3">
           For over 15 years, we have been delivering top-notch construction
           services that transform dreams into reality. With a commitment to
           innovation, precision, and sustainability, we’ve completed 300+
@@ -54,12 +53,10 @@ function AboutUsMainPage() {
             <li key={index} className="flex gap-6 items-start">
               {item.icon}
               <div>
-                <h3 className="text-lg md:text-xl font-semibold">
+                <h3 className="text-lg md:text-2xl font-semibold">
                   {item.title}
                 </h3>
-                <p className="text-sm md:text-base text-[#747474]">
-                  {item.desc}
-                </p>
+                <p className="text-sm md:text-lg text-[#747474]">{item.desc}</p>
               </div>
             </li>
           ))}

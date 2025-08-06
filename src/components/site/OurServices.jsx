@@ -36,7 +36,7 @@ function OurServices() {
   const moreButtonText = "Tüm Hizmetlerimiz";
 
   return (
-    <section className="mt-16 px-4 2xl:px-44 2xl:mt-30">
+    <section className="px-4 2xl:px-44 mt-8 xl:mt-10">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="mb-6 md:mb-0">
           <h2 className="text-xl md:text-3xl text-gray-500 font-medium">

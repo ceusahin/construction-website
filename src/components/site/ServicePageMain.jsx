@@ -40,7 +40,7 @@ function ServicePageMain() {
   ];
 
   return (
-    <div className="xl:mx-36 px-4 mt-14">
+    <div className="xl:mx-36 px-4 py-8">
       <div className="text-center mb-10">
         <h2 className="text-2xl xl:text-4xl font-medium text-[#747474]">
           Hizmetlerimiz

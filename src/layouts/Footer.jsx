@@ -14,6 +14,7 @@ const Footer = () => {
     axiosInstance
       .get(`/footer-menu/${language}`)
       .then((res) => {
+        console.log("Footer menüleri:", res.data);
         setMenus(res.data);
       })
       .catch((err) => {

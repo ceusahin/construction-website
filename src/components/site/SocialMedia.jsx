@@ -22,18 +22,13 @@ const iconMap = {
 };
 
 const platformClasses = {
-  facebook:
-    "border border-blue-700 bg-blue-600 text-white hover:bg-blue-700 hover:text-white",
+  facebook: "bg-[#101270] text-white hover:bg-blue-700 hover:text-white",
   instagram:
-    "border-transparent bg-gradient-to-b from-indigo-700 via-pink-700 to-yellow-600 text-white hover:text-white",
-  whatsapp:
-    "border border-green-700 bg-green-600 text-white hover:bg-green-700 hover:text-white",
-  twitter:
-    "border border-blue-500 bg-blue-400 text-white hover:bg-blue-500 hover:text-white",
-  telegram:
-    "border border-blue-500 bg-blue-400 text-white hover:bg-blue-500 hover:text-white",
-  linkedin:
-    "border border-blue-600 bg-blue-500 text-white hover:bg-blue-600 hover:text-white",
+    "bg-[#101270] text-white hover:bg-[linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4)] hover:text-white",
+  whatsapp: "bg-[#101270] text-white hover:bg-green-700 hover:text-white",
+  twitter: "bg-[#101270] text-white hover:bg-blue-500 hover:text-white",
+  telegram: "bg-[#101270] text-white hover:bg-blue-500 hover:text-white",
+  linkedin: "bg-[#101270] text-white hover:bg-blue-600 hover:text-white",
 };
 
 function SocialMedia() {

@@ -219,8 +219,8 @@ function Panel() {
                     </h1>
                   </div>
                   <div className="flex gap-4 mb-8">
-                    <div className="flex flex-col gap-10 w-3/4">
-                      <div className="flex flex-col md:flex-row md:justify-between gap-20 mt-5">
+                    <div className="flex flex-col items-center gap-10 w-full">
+                      <div className="flex flex-col md:flex-row md:justify-between gap-20 mt-5 md:w-2/3">
                         <div className="bg-white shadow-lg border-gray-400 border p-6 md:w-1/2">
                           <HeaderLogo />
                         </div>

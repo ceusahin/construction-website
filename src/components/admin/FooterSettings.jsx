@@ -91,7 +91,7 @@ const FooterSettings = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6">
+    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6 md:w-2/3">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">
         Footer Menü Yönetimi ({language.toUpperCase()})
       </h2>

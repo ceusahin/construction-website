@@ -19,10 +19,6 @@ function ProjectsMainPage() {
             </h2>
           </div>
           <div className="flex flex-col items-start md:items-end gap-4 md:gap-10 md:w-auto md:pt-20 ">
-            <p className="text-xs md:text-base text-[#747474] max-w-md">
-              Take a look at some of the outstanding work we’ve completed for
-              our clients.
-            </p>
             <MoreButton text={moreButtonText} />
           </div>
         </div>
