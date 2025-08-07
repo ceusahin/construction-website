@@ -16,25 +16,25 @@ const SliderComponent = () => {
   const slides = [
     {
       id: 1,
-      img: "/images/main-slider-1.png",
+      img: "/images/main-slider-1.webp",
       title: "Modern Yapılar, Kalıcı İzler",
       desc: "Estetik ve dayanıklılığı bir araya getirerek geleceği inşa ediyoruz.",
     },
     {
       id: 2,
-      img: "/images/main-slider-2.png",
+      img: "/images/main-slider-2.webp",
       title: "Zamanında Teslim, Kusursuz Kalite",
       desc: "Projelerinizi planladığınız sürede ve mükemmel şekilde tamamlıyoruz.",
     },
     {
       id: 3,
-      img: "/images/main-slider-3.png",
+      img: "/images/main-slider-3.webp",
       title: "Güvenli ve Sürdürülebilir Çözümler",
       desc: "Çevreye duyarlı ve güvenli yapı çözümleriyle fark yaratıyoruz.",
     },
     {
       id: 4,
-      img: "/images/main-slider-4.png",
+      img: "/images/main-slider-4.webp",
       title: "İnşaatta Yenilikçi Yaklaşımlar",
       desc: "Teknoloji ve mühendisliği birleştirerek yenilikçi projelere imza atıyoruz.",
     },

@@ -9,28 +9,28 @@ function OurServices() {
       name: "İnşaat Hizmetleri",
       description:
         "Konut, ticari yapı ve altyapı projelerinde tasarımdan teslimata kadar tüm aşamaları üstleniyoruz. Kaliteli malzeme ve uzman ekip ile güvenli yapılar inşa ediyoruz.",
-      img: "images/hizmetler-insaat.jpg",
+      img: "images/hizmetler-insaat.webp",
     },
     {
       id: 2,
       name: "Tekstil Üretimi",
       description:
         "Kumaş üretimi, dikim ve özel tasarım ürünler dahil olmak üzere tekstil sektörüne yönelik geniş kapsamlı çözümler sunuyoruz.",
-      img: "images/hizmetler-tekstil.jpg",
+      img: "images/hizmetler-tekstil.webp",
     },
     {
       id: 3,
       name: "Sürdürülebilir Tarım Uygulamaları",
       description:
         "Modern tekniklerle buğday, mısır, arpa gibi temel ürünlerin üretimini yapıyor, tarımsal verimliliği artırmak için sürdürülebilir çözümler uyguluyoruz.",
-      img: "images/hizmetler-tarim.jpg",
+      img: "images/hizmetler-tarim.webp",
     },
     {
       id: 4,
       name: "Hayvancılık ve Besicilik",
       description:
         "Sağlıklı ve hijyenik koşullarda büyükbaş ve küçükbaş hayvan yetiştiriciliği yapıyoruz. Besi, bakım ve üretim süreçlerinde yüksek standartlara sahibiz.",
-      img: "images/hizmetler-hayvancilik.jpg",
+      img: "images/hizmetler-hayvancilik.webp",
     },
   ];
 

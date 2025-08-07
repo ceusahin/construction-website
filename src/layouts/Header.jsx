@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import LanguageSelector from "../components/admin/LanguageSelector";
 
 function Header() {
   const [logo, setLogo] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance
@@ -31,7 +33,10 @@ function Header() {
     <header className="fixed top-0 left-0 w-full z-50 bg-[#101270] text-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between h-22 items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div
+          onClick={() => navigate("/")}
+          className="flex items-center cursor-pointer"
+        >
           {logo && (
             <img
               src={logo.imageUrl}

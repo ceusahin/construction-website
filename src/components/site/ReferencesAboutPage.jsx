@@ -3,7 +3,6 @@ import "../../App.css"; // CSS animasyon burada tanımlı
 import FadeContent from "./FadeContent";
 
 const References = () => {
-  // Tek seferlik referans listesi
   const references = useMemo(
     () => [
       { name: "İstanbul Belediyesi", iconUrl: "/images/logo-2.webp" },
@@ -13,9 +12,6 @@ const References = () => {
     ],
     []
   );
-
-  // Animasyon için çoğalt
-  const duplicatedReferences = [...references, ...references];
 
   return (
     <FadeContent
@@ -29,10 +25,10 @@ const References = () => {
           Referanslarımız
         </h2>
 
-        <div className="relative w-full overflow-hidden">
-          <div className="flex animate-slide">
-            {duplicatedReferences.map((ref, index) => (
-              <div key={index} className="flex-shrink-0 px-6">
+        <div className="slider-container">
+          <div className="slider-track">
+            {[...references, ...references].map((ref, index) => (
+              <div key={index} className="slider-item">
                 <img
                   src={ref.iconUrl}
                   alt={ref.name}

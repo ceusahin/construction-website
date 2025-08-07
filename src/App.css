@@ -27,6 +27,38 @@
   }
 }
 
-.animate-slide {
+.slider-track {
+  display: flex;
+  width: max-content;
   animation: slide 30s linear infinite;
+}
+
+/* Ana kaydırıcı alan */
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Kayan track */
+.slider-track {
+  display: flex;
+  width: fit-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+/* Tek tek referans kutuları */
+.slider-item {
+  flex-shrink: 0;
+  padding: 0 24px;
+}
+
+/* Kayma animasyonu */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

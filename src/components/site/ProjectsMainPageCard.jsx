@@ -10,28 +10,28 @@ function ProjectsMainPageCard() {
     {
       id: 1,
       constructionType: "Altyapı Projeleri",
-      imageUrl: "images/projeler-altyapi.jpg",
+      imageUrl: "images/projeler-altyapi.webp",
       description:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi cumque quis, quia numquam earum aliquam soluta porro ipsam quae sint!",
     },
     {
       id: 2,
       constructionType: "Altyapı Projeleri",
-      imageUrl: "images/projeler-altyapi.jpg",
+      imageUrl: "images/projeler-altyapi.webp",
       description:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi cumque quis, quia numquam earum aliquam soluta porro ipsam quae sint!",
     },
     {
       id: 3,
       constructionType: "Altyapı Projeleri",
-      imageUrl: "images/projeler-altyapi.jpg",
+      imageUrl: "images/projeler-altyapi.webp",
       description:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi cumque quis, quia numquam earum aliquam soluta porro ipsam quae sint!",
     },
     {
       id: 4,
       constructionType: "Altyapı Projeleri",
-      imageUrl: "images/projeler-altyapi.jpg",
+      imageUrl: "images/projeler-altyapi.webp",
       description:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi cumque quis, quia numquam earum aliquam soluta porro ipsam quae sint!",
     },
