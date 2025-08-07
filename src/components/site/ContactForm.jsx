@@ -21,12 +21,11 @@ function ContactForm() {
   };
 
   return (
-    <section className="bg-blue-300 py-16 px-4">
+    <section className="py-16">
       <div className="max-w-2xl mx-auto">
         <Paper
           sx={{
             padding: 4,
-            backgroundColor: "#93c5fd",
             color: "#fff",
             boxShadow: "none", // gölge kaldırıldı
             border: "none", // border kaldırıldı

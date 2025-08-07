@@ -5,25 +5,25 @@ const blogData = [
   {
     title: "Proje 1",
     images: [
-      "/images/main-slider-1.png",
-      "/images/main-slider-3.png",
-      "/images/main-slider-2.png",
+      "/images/main-slider-1.webp",
+      "/images/main-slider-3.webp",
+      "/images/main-slider-2.webp",
     ],
   },
   {
     title: "Proje 2",
     images: [
-      "/images/main-slider-4.png",
-      "/images/main-slider-5.png",
-      "/images/main-slider-1.png",
+      "/images/main-slider-4.webp",
+      "/images/main-slider-5.webp",
+      "/images/main-slider-1.webp",
     ],
   },
   {
     title: "Proje 3",
     images: [
-      "/images/main-slider-4.png",
-      "/images/main-slider-3.png",
-      "/images/main-slider-1.png",
+      "/images/main-slider-4.webp",
+      "/images/main-slider-3.webp",
+      "/images/main-slider-1.webp",
     ],
   },
 ];

@@ -9,7 +9,7 @@ function ContactPage() {
       <Header />
       <img
         className="mt-22 h-[30rem] w-full object-cover"
-        src="/images/main-slider-1.png"
+        src="/images/main-slider-1.webp"
         alt=""
       />
       <ContactPageCompanyInfo />

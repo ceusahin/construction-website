@@ -5,6 +5,7 @@ import References from "../components/site/ReferencesAboutPage";
 import Footer from "../layouts/Footer";
 import Header from "../layouts/Header";
 import PageContent from "../layouts/PageContent";
+import BottomContact from "../components/site/BottomContact";
 
 function ProjectDetailPage() {
   return (
@@ -12,14 +13,7 @@ function ProjectDetailPage() {
       <Header />
 
       <ProjectDetails />
-      <div className="flex flex-col mt-10 pb-10 px-20 lg:flex-row justify-between items-center bg-blue-300">
-        <div className="w-full lg:w-1/2">
-          <ContactForm />
-        </div>
-        <div className="w-full lg:w-1/2">
-          <CompanyInfo />
-        </div>
-      </div>
+      <BottomContact />
       <Footer />
     </PageContent>
   );

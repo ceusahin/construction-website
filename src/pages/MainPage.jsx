@@ -10,6 +10,7 @@ import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
 import References from "../components/site/ReferencesAboutPage";
 import FadeContent from "../components/site/FadeContent";
+import BottomContact from "../components/site/BottomContact";
 
 function MainPage() {
   return (
@@ -25,21 +26,7 @@ function MainPage() {
       <References />
       <OurServices />
       <ProjectsMainPage />
-      <FadeContent
-        blur={false}
-        duration={1000}
-        easing="ease-out"
-        initialOpacity={0}
-      >
-        <div className="flex flex-col mt-14 px-20 pb-10 lg:flex-row justify-center items-center bg-blue-300">
-          <div className="w-full lg:w-1/2">
-            <ContactForm />
-          </div>
-          <div className="w-full lg:w-1/2">
-            <CompanyInfo />
-          </div>
-        </div>
-      </FadeContent>
+      <BottomContact />
       <Footer />
     </PageContent>
   );

@@ -24,28 +24,28 @@ function ContactPageCompanyInfo() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex flex-col text-center items-center gap-4 justify-center">
-              <Phone size={75} />
+              <Phone size={60} />
               <div>
                 <h1 className="text-[32px] font-extrabold">Bizi Arayın</h1>
                 <p className="text-[24px]">+90 123 456 7890</p>
               </div>
             </div>
             <div className="flex flex-col text-center items-center gap-4 justify-center">
-              <Clock size={75} />
+              <Clock size={60} />
               <div>
                 <h1 className="text-[32px] font-extrabold">Çalışma Saatleri</h1>
                 <p className="text-[24px]">Pzt-Cmt: 09:00 - 17:00</p>
               </div>
             </div>
             <div className="flex flex-col text-center items-center gap-4 justify-center">
-              <Mail size={75} />
+              <Mail size={60} />
               <div>
                 <h1 className="text-[32px] font-extrabold">Destek Hattı</h1>
                 <p className="text-[24px]">support@elever.com</p>
               </div>
             </div>
             <div className="flex flex-col text-center items-center gap-4 justify-center">
-              <MapPin size={75} />
+              <MapPin size={60} />
               <div>
                 <h1 className="text-[32px] font-extrabold">Adresimiz</h1>
                 <p className="text-[24px]">456 Elm Avenue, San Francisco</p>

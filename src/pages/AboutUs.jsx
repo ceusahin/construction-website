@@ -8,6 +8,7 @@ import ContactForm from "../components/site/ContactForm";
 import CompanyInfo from "../components/site/CompanyInfo";
 import PageContent from "../layouts/PageContent";
 import FadeContent from "../components/site/FadeContent";
+import BottomContact from "../components/site/BottomContact";
 
 function AboutUs() {
   return (
@@ -15,27 +16,13 @@ function AboutUs() {
       <Header />
       <img
         className="mt-22 h-[30rem] w-full object-cover"
-        src="/images/main-slider-2.png"
+        src="/images/main-slider-2.webp"
         alt=""
       />
       <AboutUsAboutPage />
       <YouTubeEmbed videoId="zE8r0U2kFYA" />
       <OurHistory />
-      <FadeContent
-        blur={false}
-        duration={1000}
-        easing="ease-out"
-        initialOpacity={0}
-      >
-        <div className="flex flex-col mt-10 px-20 pb-10 lg:flex-row justify-between items-center bg-blue-300">
-          <div className="w-full lg:w-1/2">
-            <ContactForm />
-          </div>
-          <div className="w-full lg:w-1/2">
-            <CompanyInfo />
-          </div>
-        </div>
-      </FadeContent>
+      <BottomContact />
       <Footer />
     </PageContent>
   );

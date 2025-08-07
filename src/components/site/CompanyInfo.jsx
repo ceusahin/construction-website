@@ -2,7 +2,7 @@ import { Phone, Clock, Mail, MapPin } from "lucide-react";
 
 function CompanyInfo() {
   return (
-    <div className="text-[#343434] w-full mx-auto p-8 rounded-lg">
+    <div className="text-[#343434] w-full mx-auto rounded-lg">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col items-center justify-center">
           <Phone size={50} className="mb-4" />

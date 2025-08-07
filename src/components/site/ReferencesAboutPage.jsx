@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import "../../App.css"; // CSS animasyon burada tanımlı
-import FadeContent from "./FadeContent";
+import "../../App.css";
 
 const References = () => {
   const references = useMemo(
@@ -14,12 +13,7 @@ const References = () => {
   );
 
   return (
-    <FadeContent
-      blur={false}
-      duration={1000}
-      easing="ease-out"
-      initialOpacity={0}
-    >
+    <div>
       <div className="py-20 bg-white overflow-hidden">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
           Referanslarımız
@@ -42,7 +36,7 @@ const References = () => {
           </div>
         </div>
       </div>
-    </FadeContent>
+    </div>
   );
 };
 
