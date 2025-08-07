@@ -27,9 +27,9 @@ function ContactForm() {
           sx={{
             padding: 4,
             color: "#fff",
-            boxShadow: "none", // gölge kaldırıldı
-            border: "none", // border kaldırıldı
-            borderRadius: 3, // dilersen burayı artırabilirsin
+            boxShadow: "none",
+            border: "none",
+            borderRadius: 3,
           }}
         >
           <Typography
