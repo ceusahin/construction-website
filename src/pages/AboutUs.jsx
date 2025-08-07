@@ -7,6 +7,7 @@ import Header from "../layouts/Header";
 import ContactForm from "../components/site/ContactForm";
 import CompanyInfo from "../components/site/CompanyInfo";
 import PageContent from "../layouts/PageContent";
+import FadeContent from "../components/site/FadeContent";
 
 function AboutUs() {
   return (
@@ -20,14 +21,21 @@ function AboutUs() {
       <AboutUsAboutPage />
       <YouTubeEmbed videoId="zE8r0U2kFYA" />
       <OurHistory />
-      <div className="flex flex-col mt-10 px-20 pb-10 lg:flex-row justify-between items-center bg-blue-300">
-        <div className="w-full lg:w-1/2">
-          <ContactForm />
+      <FadeContent
+        blur={false}
+        duration={1000}
+        easing="ease-out"
+        initialOpacity={0}
+      >
+        <div className="flex flex-col mt-10 px-20 pb-10 lg:flex-row justify-between items-center bg-blue-300">
+          <div className="w-full lg:w-1/2">
+            <ContactForm />
+          </div>
+          <div className="w-full lg:w-1/2">
+            <CompanyInfo />
+          </div>
         </div>
-        <div className="w-full lg:w-1/2">
-          <CompanyInfo />
-        </div>
-      </div>
+      </FadeContent>
       <Footer />
     </PageContent>
   );

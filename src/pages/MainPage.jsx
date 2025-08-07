@@ -9,6 +9,7 @@ import PageContent from "../layouts/PageContent";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
 import References from "../components/site/ReferencesAboutPage";
+import FadeContent from "../components/site/FadeContent";
 
 function MainPage() {
   return (
@@ -24,14 +25,21 @@ function MainPage() {
       <References />
       <OurServices />
       <ProjectsMainPage />
-      <div className="flex flex-col mt-14 px-20 pb-10 lg:flex-row justify-center items-center bg-blue-300">
-        <div className="w-full lg:w-1/2">
-          <ContactForm />
+      <FadeContent
+        blur={false}
+        duration={1000}
+        easing="ease-out"
+        initialOpacity={0}
+      >
+        <div className="flex flex-col mt-14 px-20 pb-10 lg:flex-row justify-center items-center bg-blue-300">
+          <div className="w-full lg:w-1/2">
+            <ContactForm />
+          </div>
+          <div className="w-full lg:w-1/2">
+            <CompanyInfo />
+          </div>
         </div>
-        <div className="w-full lg:w-1/2">
-          <CompanyInfo />
-        </div>
-      </div>
+      </FadeContent>
       <Footer />
     </PageContent>
   );

@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import TextType from "./TextType";
 
 const SliderComponent = () => {
   const settings = {
@@ -16,14 +17,26 @@ const SliderComponent = () => {
     {
       id: 1,
       img: "/images/main-slider-1.png",
-      title: "We Build the Future with Strength & Precision",
-      desc: "Delivering top-notch construction solutions on time and within budget",
+      title: "Modern Yapılar, Kalıcı İzler",
+      desc: "Estetik ve dayanıklılığı bir araya getirerek geleceği inşa ediyoruz.",
     },
     {
       id: 2,
       img: "/images/main-slider-2.png",
-      title: "We Build the Future with Strength & Precision",
-      desc: "Delivering top-notch construction solutions on time and within budget",
+      title: "Zamanında Teslim, Kusursuz Kalite",
+      desc: "Projelerinizi planladığınız sürede ve mükemmel şekilde tamamlıyoruz.",
+    },
+    {
+      id: 3,
+      img: "/images/main-slider-3.png",
+      title: "Güvenli ve Sürdürülebilir Çözümler",
+      desc: "Çevreye duyarlı ve güvenli yapı çözümleriyle fark yaratıyoruz.",
+    },
+    {
+      id: 4,
+      img: "/images/main-slider-4.png",
+      title: "İnşaatta Yenilikçi Yaklaşımlar",
+      desc: "Teknoloji ve mühendisliği birleştirerek yenilikçi projelere imza atıyoruz.",
     },
   ];
 
@@ -39,9 +52,14 @@ const SliderComponent = () => {
             />
             <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
             <div className="absolute top-[36%] md:top-1/3 xl:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center z-20 w-11/12 sm:w-10/12">
-              <h1 className="text-lg sm:text-2xl md:text-3xl xl:text-5xl font-bold mb-3">
-                {slide.title}
-              </h1>
+              <TextType
+                className="text-lg sm:text-2xl md:text-3xl xl:text-5xl font-bold mb-3"
+                text={slide.title}
+                typingSpeed={135}
+                pauseDuration={1500}
+                showCursor={true}
+                cursorCharacter="|"
+              />
               <p className="text-sm sm:text-base md:text-lg xl:text-2xl">
                 {slide.desc}
               </p>

@@ -1,3 +1,4 @@
+import FadeContent from "./FadeContent";
 import MoreButton from "./MoreButton";
 import OurServicesCard from "./OurServicesCard";
 
@@ -36,36 +37,43 @@ function OurServices() {
   const moreButtonText = "Tüm Hizmetlerimiz";
 
   return (
-    <section className="px-4 2xl:px-44 mt-8 xl:mt-10">
-      <div className="flex flex-col md:flex-row items-center justify-between">
-        <div className="mb-6 md:mb-0">
-          <h2 className="text-xl md:text-3xl text-gray-500 font-medium">
-            Hizmetlerimiz
-          </h2>
-          <h1 className="text-2xl md:text-3xl 2xl:text-6xl font-bold mt-2">
-            Güvenilir ve Kapsamlı
-            <br />
-            Hizmetlerimizle Yanınızdayız
-          </h1>
+    <FadeContent
+      blur={false}
+      duration={1000}
+      easing="ease-out"
+      initialOpacity={0}
+    >
+      <section className="px-4 2xl:px-44 mt-8 xl:mt-10">
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="mb-6 md:mb-0">
+            <h2 className="text-xl md:text-3xl text-gray-500 font-medium">
+              Hizmetlerimiz
+            </h2>
+            <h1 className="text-2xl md:text-3xl 2xl:text-6xl font-bold mt-2">
+              Güvenilir ve Kapsamlı
+              <br />
+              Hizmetlerimizle Yanınızdayız
+            </h1>
+          </div>
+          <div className="w-full md:w-auto flex justify-end md:justify-end md:pt-30">
+            <MoreButton text={moreButtonText} />
+          </div>
         </div>
-        <div className="w-full md:w-auto flex justify-end md:justify-end md:pt-30">
-          <MoreButton text={moreButtonText} />
-        </div>
-      </div>
 
-      <div className="mt-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 pb-6">
-          {services.map((service) => (
-            <OurServicesCard
-              key={service.id}
-              img={service.img}
-              name={service.name}
-              description={service.description}
-            />
-          ))}
+        <div className="mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 pb-6">
+            {services.map((service) => (
+              <OurServicesCard
+                key={service.id}
+                img={service.img}
+                name={service.name}
+                description={service.description}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </FadeContent>
   );
 }
 

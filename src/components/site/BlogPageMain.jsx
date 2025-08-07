@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FadeContent from "./FadeContent";
 
 const blogData = [
   {
@@ -89,31 +90,38 @@ function ImageSlider({ images, title }) {
 
 export default function BlogPageMain() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center mb-10">
-        <h2 className="text-2xl xl:text-3xl font-medium text-[#747474]">
-          Blog, Image Gallery & News
-        </h2>
-        <h1 className="text-4xl xl:text-5xl font-bold my-5">
-          Committed to Excellence in Construction
-        </h1>
-        <p className="text-xl xl:text-2xl text-[#747474] mt-3">
-          For over 15 years, we have been delivering top-notch construction
-          services that transform dreams into reality. With a commitment to
-          innovation, precision, and sustainability, we’ve completed 300+
-          projects globally.
-        </p>
+    <FadeContent
+      blur={false}
+      duration={1000}
+      easing="ease-out"
+      initialOpacity={0}
+    >
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl xl:text-3xl font-medium text-[#747474]">
+            Blog, Image Gallery & News
+          </h2>
+          <h1 className="text-4xl xl:text-5xl font-bold my-5">
+            Committed to Excellence in Construction
+          </h1>
+          <p className="text-xl xl:text-2xl text-[#747474] mt-3">
+            For over 15 years, we have been delivering top-notch construction
+            services that transform dreams into reality. With a commitment to
+            innovation, precision, and sustainability, we’ve completed 300+
+            projects globally.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogData.map((item, idx) => (
+            <div
+              key={idx}
+              className="rounded-lg overflow-hidden shadow-lg aspect-[4/3]" // Sabit bir oran verdik
+            >
+              <ImageSlider images={item.images} title={item.title} />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogData.map((item, idx) => (
-          <div
-            key={idx}
-            className="rounded-lg overflow-hidden shadow-lg aspect-[4/3]" // Sabit bir oran verdik
-          >
-            <ImageSlider images={item.images} title={item.title} />
-          </div>
-        ))}
-      </div>
-    </div>
+    </FadeContent>
   );
 }

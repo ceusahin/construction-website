@@ -1,11 +1,17 @@
 import ProjectsMainPageCard from "./ProjectsMainPageCard";
 import MoreButton from "./MoreButton";
+import FadeContent from "./FadeContent";
 
 function ProjectsMainPage() {
   const moreButtonText = "Tüm Projelerimiz";
 
   return (
-    <div>
+    <FadeContent
+      blur={false}
+      duration={1000}
+      easing="ease-out"
+      initialOpacity={0}
+    >
       <div className="px-4 mt-14 2xl:px-44 flex flex-col">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-10">
           <div className="w-full md:w-auto">
@@ -25,7 +31,7 @@ function ProjectsMainPage() {
 
         <ProjectsMainPageCard />
       </div>
-    </div>
+    </FadeContent>
   );
 }
 

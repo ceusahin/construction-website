@@ -1,59 +1,133 @@
+import { useState } from "react";
+import { Box, TextField, Button, Typography, Paper } from "@mui/material";
+
 function ContactForm() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form verileri:", form);
+    // Backend bağlantısı burada yapılır
+  };
+
   return (
-    <section className="mt-14 mb-6 px-4">
+    <section className="bg-blue-300 py-16 px-4">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">Bize Ulaşın</h2>
-        <p className="text-center text-gray-600 mb-8">
-          Sorularınız, iş teklifleri veya iş birliği talepleriniz için bizimle
-          iletişime geçebilirsiniz.
-        </p>
-
-        <form className="space-y-6">
-          <div className="flex flex-col md:flex-row gap-4">
-            <input
-              type="text"
-              placeholder="Adınız"
-              className="w-full p-3 border rounded-md bg-white"
+        <Paper
+          sx={{
+            padding: 4,
+            backgroundColor: "#93c5fd",
+            color: "#fff",
+            boxShadow: "none", // gölge kaldırıldı
+            border: "none", // border kaldırıldı
+            borderRadius: 3, // dilersen burayı artırabilirsin
+          }}
+        >
+          <Typography
+            variant="h5"
+            gutterBottom
+            textAlign="center"
+            fontWeight={700}
+            color="black"
+          >
+            Bize Ulaşın
+          </Typography>
+          <Typography
+            variant="body1"
+            textAlign="center"
+            mb={3}
+            sx={{ color: "#000000" }}
+          >
+            Sorularınız, iş teklifleri veya iş birliği talepleriniz için bizimle
+            iletişime geçebilirsiniz.
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          >
+            <div className="flex flex-col md:flex-row gap-4">
+              <TextField
+                className="w-full"
+                label="Adınız"
+                name="name"
+                variant="filled"
+                onChange={handleChange}
+                required
+                InputProps={{ style: { backgroundColor: "#fff" } }}
+              />
+              <TextField
+                className="w-full"
+                label="E-posta"
+                name="email"
+                type="email"
+                variant="filled"
+                onChange={handleChange}
+                required
+                InputProps={{ style: { backgroundColor: "#fff" } }}
+              />
+            </div>
+            <div className="flex flex-col md:flex-row gap-4">
+              <TextField
+                className="w-full"
+                label="Telefon"
+                name="phone"
+                type="tel"
+                variant="filled"
+                onChange={handleChange}
+                required
+                InputProps={{ style: { backgroundColor: "#fff" } }}
+              />
+              <TextField
+                className="w-full"
+                label="Konu"
+                name="subject"
+                variant="filled"
+                onChange={handleChange}
+                required
+                InputProps={{ style: { backgroundColor: "#fff" } }}
+              />
+            </div>
+            <TextField
+              label="Mesajınız"
+              name="message"
+              multiline
+              rows={4}
+              variant="filled"
+              onChange={handleChange}
               required
+              InputProps={{ style: { backgroundColor: "#fff" } }}
             />
-            <input
-              type="email"
-              placeholder="E-posta Adresiniz"
-              className="w-full p-3 border rounded-md bg-white"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4">
-            <input
-              type="tel"
-              placeholder="Telefon Numaranız"
-              className="w-full p-3 border rounded-md bg-white"
-              required
-            />
-            <input
-              type="text"
-              placeholder="Konu"
-              className="w-full p-3 border rounded-md bg-white"
-              required
-            />
-          </div>
-
-          <textarea
-            placeholder="Mesajınız"
-            className="w-full p-3 border rounded-md h-32 resize-none bg-white"
-            required
-          ></textarea>
-
-          <div className="text-center">
-            <button
+            <Button
               type="submit"
-              className="bg-blue-600 hover:bg-[#101270] cursor-pointer text-white font-semibold py-3 px-6 rounded-md transition-all"
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 2,
+                bgcolor: "#101270",
+                color: "#fff",
+                borderRadius: "8px",
+                padding: "12px 24px",
+                fontWeight: 600,
+                "&:hover": {
+                  backgroundColor: "#101240",
+                },
+              }}
             >
               Gönder
-            </button>
-          </div>
-        </form>
+            </Button>
+          </Box>
+        </Paper>
       </div>
     </section>
   );
