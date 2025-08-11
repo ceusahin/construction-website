@@ -1,13 +1,9 @@
 import AboutUsAboutPage from "../components/site/AboutUsAboutPage";
 import OurHistory from "../components/site/OurHistory";
-import References from "../components/site/ReferencesAboutPage";
 import YouTubeEmbed from "../components/site/YoutubeEmbed";
 import Footer from "../layouts/Footer";
 import Header from "../layouts/Header";
-import ContactForm from "../components/site/ContactForm";
-import CompanyInfo from "../components/site/CompanyInfo";
 import PageContent from "../layouts/PageContent";
-import FadeContent from "../components/site/FadeContent";
 import BottomContact from "../components/site/BottomContact";
 
 function AboutUs() {

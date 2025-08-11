@@ -1,6 +1,6 @@
 import ProjectsMainPageCard from "./ProjectsMainPageCard";
-import MoreButton from "./MoreButton";
-import FadeContent from "./FadeContent";
+import MoreButton from "../../utils/MoreButton";
+import FadeContent from "../../utils/FadeContent";
 
 function ProjectsMainPage() {
   const moreButtonText = "Tüm Projelerimiz";

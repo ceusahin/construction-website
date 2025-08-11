@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import LanguageSelector from "../components/admin/LanguageSelector";
+import ThemeToggle from "../utils/ThemeToggle";
 
 function Header() {
   const [logo, setLogo] = useState(null);
@@ -111,6 +112,7 @@ function Header() {
       </div>
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
         <LanguageSelector />
+        {/* <ThemeToggle /> */}
       </div>
     </header>
   );

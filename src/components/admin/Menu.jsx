@@ -16,40 +16,64 @@ const contentItems = [
   { label: "İletişim", key: "iletisim" },
 ];
 
-const Menu = ({ onSelect }) => (
-  <div className="fixed left-0 top-0 h-screen w-60 bg-gray-900 text-white shadow-lg z-50 flex flex-col px-6 pt-8 gap-8 overflow-y-auto">
-    <div className="text-xl font-bold tracking-wide text-center">
-      YÖNETİM PANELİ
-    </div>
-    <LanguageSelector />
-    <ul className="flex flex-col gap-4">
-      <h3 className="px-2 py-4 text-s text-yellow-400">Menü</h3>
-      {menuItems.map((item) => (
-        <li key={item.key}>
-          <button
-            className="w-full text-left px-2 py-2 rounded hover:bg-yellow-400 hover:text-gray-900 transition-colors"
-            onClick={() => onSelect && onSelect(item.key)}
-          >
-            {item.label}
-          </button>
-        </li>
-      ))}
-    </ul>
+const Menu = ({ onSelect, activePage, activeContentItem }) => {
+  const isActive = (key) => activePage === key || activeContentItem === key;
 
-    <ul className="flex flex-col gap-4">
-      <h3 className="px-2 py-4 text-s text-yellow-400">İçerik Ayarları</h3>
-      {contentItems.map((item) => (
-        <li key={item.key}>
-          <button
-            className="w-full text-left px-2 py-2 rounded hover:bg-yellow-400 hover:text-gray-900 transition-colors"
-            onClick={() => onSelect && onSelect(item.key)}
-          >
-            {item.label}
-          </button>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+  return (
+    <div className="fixed left-0 top-0 h-screen w-60 bg-black text-white shadow-lg z-50 flex flex-col px-6 pt-8 gap-8 overflow-y-auto">
+      <img
+        src="/images/brsm-p-logo.webp"
+        alt=""
+        className="h-10 object-contain"
+      />
+      <div className="text-xl font-bold tracking-wide text-center text-red-500">
+        YÖNETİM PANELİ
+      </div>
+      <LanguageSelector />
+
+      {/* Menü */}
+      <ul className="flex flex-col gap-2">
+        <h3 className="px-2 py-4 text-s text-red-500 font-bold text-xl">
+          Menü
+        </h3>
+        {menuItems.map((item) => (
+          <li key={item.key}>
+            <button
+              className={`w-full text-left px-2 py-2 rounded transition-colors cursor-pointer ${
+                isActive(item.key)
+                  ? "bg-red-500 text-white font-semibold"
+                  : "hover:bg-red-500 hover:text-white"
+              }`}
+              onClick={() => onSelect && onSelect(item.key)}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {/* İçerik Ayarları */}
+      <ul className="flex flex-col gap-2">
+        <h3 className="px-2 py-4 text-s text-red-500 font-bold text-xl">
+          İçerik Ayarları
+        </h3>
+        {contentItems.map((item) => (
+          <li key={item.key}>
+            <button
+              className={`w-full cursor-pointer text-left px-2 py-2 rounded transition-colors ${
+                isActive(item.key)
+                  ? "bg-red-500 text-white font-semibold"
+                  : "hover:bg-red-500 hover:text-white"
+              }`}
+              onClick={() => onSelect && onSelect(item.key)}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Menu;

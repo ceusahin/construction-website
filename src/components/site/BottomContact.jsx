@@ -1,6 +1,6 @@
 import CompanyInfo from "./CompanyInfo";
 import ContactForm from "./ContactForm";
-import FadeContent from "./FadeContent";
+import FadeContent from "../../utils/FadeContent";
 
 function BottomContact() {
   return (

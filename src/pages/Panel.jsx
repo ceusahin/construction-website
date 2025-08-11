@@ -2,8 +2,6 @@ import { useState } from "react";
 import Menu from "../components/admin/Menu";
 import PageContent from "../layouts/PageContent";
 import Dashboard from "../components/admin/Dashboard";
-import HeaderLogo from "../components/admin/HeaderLogo";
-import FaviconLogo from "../components/admin/FaviconLogo";
 import FooterSettings from "../components/admin/FooterSettings";
 import SocialMediaSettings from "../components/admin/SocialMediaSettings";
 import SeoSettings from "../components/admin/SeoSettings";
@@ -14,6 +12,7 @@ import ContactInfoSettings from "../components/admin/ContactInfoSettings";
 import ServiceSettings from "../components/admin/ServiceSettings";
 import ServiceTextSettings from "../components/admin/ServiceTextSettings";
 import AboutSectionSettings from "../components/admin/AboutSectionSettings";
+import LogoSettings from "../components/admin/UploadHeader";
 
 function Panel() {
   const [activePage, setActivePage] = useState("anasayfa");
@@ -38,12 +37,6 @@ function Panel() {
     { name: "AVM İnşaatı", startDate: "2025-06-15", status: "Tamamlandı" },
   ];
 
-  const mainPageContextSettings = [
-    { label: "Slider Ayarları", key: "context-slider" },
-    { label: "Tecrübe", key: "context-experience" },
-    { label: "Şirket Bilgi Ayarları", key: "context-about-company" },
-  ];
-
   const servicesContextSettings = [
     { label: "Başlık/Yazı İçerik Ayarları", key: "services-context" },
     { label: "Hizmet Ekle/Çıkar/Düzenle", key: "services-card" },
@@ -56,8 +49,10 @@ function Panel() {
 
   return (
     <PageContent>
-      <div className="flex">
+      <div className="flex bg-[#101010]">
         <Menu
+          activePage={activePage}
+          activeContentItem={activeContentItem}
           onSelect={(key) => {
             if (
               [
@@ -78,71 +73,39 @@ function Panel() {
             }
           }}
         />
-        <div className="ml-60 flex-1 p-8">
-          {/* Eğer activeContentItem varsa, sadece onun içeriğini göster */}
+        <div className="ml-60 flex-1">
           {activeContentItem ? (
             <>
               {activeContentItem === "anasayfa-icerik" && (
-                <div className="p-6 space-y-6">
+                <div className="p-14 space-y-6 text-white">
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
-                    <span className="text-gray-500">/</span>
+                    <span className="">/</span>
                     <h1 className="text-l font-light">İçerik Ayarları</h1>
-                    <span className="text-gray-500">/</span>
-                    <h1 className="text-xl font-bold text-gray-700">
-                      Ana Sayfa
-                    </h1>
+                    <span className="">/</span>
+                    <h1 className="text-xl font-bold">Ana Sayfa</h1>
                   </div>
-                  <div className="flex gap-4 mb-8">
-                    {mainPageContextSettings.map((item) => (
-                      <button
-                        key={item.key}
-                        className={`px-4 py-2 rounded ${
-                          activeSiteSetting === item.key
-                            ? "bg-yellow-400 text-gray-900 font-semibold"
-                            : "bg-gray-200 text-gray-700"
-                        }`}
-                        onClick={() => setActiveSiteSetting(item.key)}
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                  <div>
-                    {activeSiteSetting === "context-slider" && (
-                      <div>
-                        <SliderSettings />
-                      </div>
-                    )}
-                    {activeSiteSetting === "context-experience" && (
-                      <div>
-                        <ExperienceSettings />
-                      </div>
-                    )}
-                    {activeSiteSetting === "context-about-company" && (
-                      <div>
-                        <ContactInfoSettings />
-                      </div>
-                    )}
+                  <div className="flex flex-col gap-4 mb-8">
+                    <SliderSettings />
+                    <ExperienceSettings />
+                    <ContactInfoSettings />
                   </div>
                 </div>
               )}
               {activeContentItem === "hakkimizda" && (
-                <div className="p-6 space-y-6">
+                <div className="p-14 space-y-6 text-white">
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
-                    <span className="text-gray-500">/</span>
+                    <span className="">/</span>
                     <h1 className="text-l font-light">İçerik Ayarları</h1>
-                    <span className="text-gray-500">/</span>
-                    <h1 className="text-xl font-bold text-gray-700">
-                      Hakkımızda
-                    </h1>
+                    <span className="">/</span>
+                    <h1 className="text-xl font-bold">Hakkımızda</h1>
                   </div>
                   <AboutSectionSettings />
                 </div>
               )}
               {activeContentItem === "hizmetlerimiz" && (
-                <div className="p-6 space-y-6">
+                <div className="p-14 space-y-6">
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
                     <span className="text-gray-500">/</span>
@@ -186,9 +149,7 @@ function Panel() {
                 <div>Projelerimiz İçerik Ayarları Burada</div>
               )}
               {activeContentItem === "blog" && (
-                <>
-                  <h1>Blog İçerik Ayarları Burada</h1>
-                </>
+                <h1>Blog İçerik Ayarları Burada</h1>
               )}
               {activeContentItem === "referanslar" && (
                 <div>Referanslar İçerik Ayarları Burada</div>
@@ -211,23 +172,14 @@ function Panel() {
               )}
               {activePage === "site-yonetimi" && (
                 <div className="p-6 space-y-6">
-                  <div className="flex flex-row items-center gap-4">
+                  <div className="flex flex-row items-center gap-4 text-white">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
-                    <span className="text-gray-500">/</span>
-                    <h1 className="text-xl font-bold text-gray-700">
-                      Site Yönetimi
-                    </h1>
+                    <span className="">/</span>
+                    <h1 className="text-xl font-bold">Site Yönetimi</h1>
                   </div>
                   <div className="flex gap-4 mb-8">
                     <div className="flex flex-col items-center gap-10 w-full">
-                      <div className="flex flex-col md:flex-row md:justify-between gap-20 mt-5 md:w-2/3">
-                        <div className="bg-white shadow-lg border-gray-400 border p-6 md:w-1/2">
-                          <HeaderLogo />
-                        </div>
-                        <div className="bg-white shadow-lg border-gray-400 border p-6 md:w-1/2">
-                          <FaviconLogo />
-                        </div>
-                      </div>
+                      <LogoSettings />
                       <CompanyInfoSettings />
                       <FooterSettings />
                       <SocialMediaSettings />

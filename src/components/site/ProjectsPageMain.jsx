@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProjectCardProjectsPage from "./ProjectCardProjectsPage";
 import projects from "../../data/projects";
-import FadeContent from "./FadeContent";
+import FadeContent from "../../utils/FadeContent";
 
 const ProjectsPageMain = () => {
   const [selectedType, setSelectedType] = useState("Tümü");

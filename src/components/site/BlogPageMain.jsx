@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FadeContent from "./FadeContent";
+import FadeContent from "../../utils/FadeContent";
 
 const blogData = [
   {

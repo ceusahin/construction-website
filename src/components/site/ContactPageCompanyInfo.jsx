@@ -1,6 +1,6 @@
 import { Phone, Clock, Mail, MapPin } from "lucide-react";
 import ContactPageContactForm from "./ContactPageContactForm";
-import FadeContent from "./FadeContent";
+import FadeContent from "../../utils/FadeContent";
 
 function ContactPageCompanyInfo() {
   return (

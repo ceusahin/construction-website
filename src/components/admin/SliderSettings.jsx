@@ -4,427 +4,432 @@ import axiosInstance from "../../api/axiosInstance";
 
 const SliderSettings = () => {
   const { language } = useLanguage();
+
   const [sliders, setSliders] = useState([]);
-  const [showGallery, setShowGallery] = useState(false);
-  const [selectedSliderIndex, setSelectedSliderIndex] = useState(null);
-  const [galleryImages, setGalleryImages] = useState([]);
-  const [galleryLoading, setGalleryLoading] = useState(false);
-  const [activeTabs, setActiveTabs] = useState({});
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
+    if (!language) return;
     fetchSliders(language);
-    setSelectedSliderIndex(null);
+    setSelectedIndex(null);
   }, [language]);
 
   const fetchSliders = async (lang) => {
-    const res = await axiosInstance.get(`/slider/${lang}`);
-    console.log("Sliders fetched:", res.data);
-    setSliders(res.data);
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get(`/slider/${lang}`);
+      setSliders(res.data || []);
+      setMessage("");
+    } catch (err) {
+      console.error(err);
+      setMessage("Sliderlar yüklenirken hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleTabChange = (lang) => {
-    if (selectedSliderIndex === null) return;
-    setActiveTabs((prev) => ({ ...prev, [selectedSliderIndex]: lang }));
-  };
+  const selectedSlider = selectedIndex !== null ? sliders[selectedIndex] : null;
 
-  const handleTranslationChange = (lang, field, value) => {
-    if (selectedSliderIndex === null) return;
-    setSliders((prevSliders) => {
-      const updated = [...prevSliders];
-      const translations = {
-        ...(updated[selectedSliderIndex].translations || {}),
-      };
-      translations[lang] = { ...translations[lang], [field]: value };
-      updated[selectedSliderIndex] = {
-        ...updated[selectedSliderIndex],
-        translations,
-      };
-      return updated;
+  const updateSliderField = (field, value) => {
+    if (selectedIndex === null) return;
+    setSliders((prev) => {
+      const copy = [...prev];
+      copy[selectedIndex] = { ...copy[selectedIndex], [field]: value };
+      return copy;
     });
   };
 
-  const handleInputChange = (field, value) => {
-    if (selectedSliderIndex === null) return;
-    setSliders((prevSliders) => {
-      const updated = [...prevSliders];
-      updated[selectedSliderIndex] = {
-        ...updated[selectedSliderIndex],
+  const updateTranslationField = (field, value) => {
+    if (selectedIndex === null) return;
+    setSliders((prev) => {
+      const copy = [...prev];
+      const currentSlider = copy[selectedIndex];
+      const translations = { ...(currentSlider.translations || {}) };
+      translations[language] = {
+        ...(translations[language] || {
+          title: "",
+          description: "",
+          button1Text: "",
+          button2Text: "",
+        }),
         [field]: value,
       };
-      return updated;
+      copy[selectedIndex] = { ...currentSlider, translations };
+      return copy;
     });
   };
 
-  const handleSave = async (slider) => {
-    if (slider.id) {
-      alert("Bu slider zaten kayıtlı, güncelle butonunu kullanın.");
+  const addNewSlider = () => {
+    if (sliders.length >= 3) {
+      alert("Maksimum 3 slider eklenebilir.");
       return;
     }
+    const newSlider = {
+      id: null,
+      imageUrl: "",
+      button1Url: "",
+      button2Url: "",
+      translations: {
+        tr: { title: "", description: "", button1Text: "", button2Text: "" },
+        en: { title: "", description: "", button1Text: "", button2Text: "" },
+      },
+    };
+    setSliders((prev) => [...prev, newSlider]);
+    setSelectedIndex(sliders.length);
+    setMessage("");
+  };
+
+  const saveSlider = async () => {
+    if (selectedIndex === null) return;
+    const slider = sliders[selectedIndex];
+
+    if (!slider.imageUrl) {
+      alert("Lütfen slider için bir resim yükleyin.");
+      return;
+    }
+    if (!slider.translations[language]?.title?.trim()) {
+      alert("Lütfen başlık alanını doldurun.");
+      return;
+    }
+
+    setLoading(true);
     try {
-      const res = await axiosInstance.post(`/slider`, slider);
+      const res = await axiosInstance.post("/slider", slider);
       const savedSlider = res.data;
-      setSliders((prev) => prev.map((s) => (s === slider ? savedSlider : s)));
-      setSelectedSliderIndex(sliders.findIndex((s) => s === slider)); // Kayıt sonrası seçili tut
-      alert("Slider kaydedildi.");
+      setSliders((prev) =>
+        prev.map((s, i) => (i === selectedIndex ? savedSlider : s))
+      );
+      setMessage("Slider başarıyla kaydedildi.");
     } catch (err) {
-      console.error("Slider kaydetme hatası:", err);
+      console.error(err);
+      setMessage("Slider kaydedilirken hata oluştu.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleUpdate = async (slider) => {
+  const updateSlider = async () => {
+    if (selectedIndex === null) return;
+    const slider = sliders[selectedIndex];
     if (!slider.id) {
-      alert("Bu slider henüz kayıtlı değil, önce kaydetmelisiniz.");
+      alert("Slider öncelikle kaydedilmeli.");
       return;
     }
+    setLoading(true);
     try {
       const res = await axiosInstance.put(`/slider/${slider.id}`, slider);
       const updatedSlider = res.data;
-      setSliders((prev) => {
-        const idx = prev.findIndex((s) => s.id === updatedSlider.id);
-        if (idx !== -1) {
-          const copy = [...prev];
-          copy[idx] = updatedSlider;
-          return copy;
-        }
-        return prev;
-      });
-      alert("Slider güncellendi.");
+      setSliders((prev) =>
+        prev.map((s, i) => (i === selectedIndex ? updatedSlider : s))
+      );
+      setMessage("Slider güncellendi.");
     } catch (err) {
-      console.error("Slider güncelleme hatası:", err);
+      console.error(err);
+      setMessage("Slider güncellenirken hata oluştu.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!id) {
-      alert("Henüz kaydedilmemiş bir slider silinemez.");
+  const deleteSlider = async () => {
+    if (selectedIndex === null) return;
+    const slider = sliders[selectedIndex];
+    if (!slider.id) {
+      alert("Henüz kaydedilmemiş slider silinemez.");
       return;
     }
-    await axiosInstance.delete(`/slider/${id}`);
-    fetchSliders(language);
-    setSelectedSliderIndex(null);
-  };
-
-  const openGallery = async () => {
-    if (selectedSliderIndex === null) return;
-    setShowGallery(true);
-    setGalleryLoading(true);
+    if (!window.confirm("Sliderı silmek istediğinize emin misiniz?")) return;
+    setLoading(true);
     try {
-      const res = await axiosInstance.get("/gallery");
-      setGalleryImages(res.data);
-    } catch (error) {
-      console.error("Galeriden fotoğraf alınamadı", error);
-      setGalleryImages([]);
+      await axiosInstance.delete(`/slider/${slider.id}`);
+      await fetchSliders(language);
+      setSelectedIndex(null);
+      setMessage("Slider silindi.");
+    } catch (err) {
+      console.error(err);
+      setMessage("Slider silinirken hata oluştu.");
     } finally {
-      setGalleryLoading(false);
+      setLoading(false);
     }
   };
 
-  const selectImage = (imageUrl) => {
-    if (selectedSliderIndex === null) return;
-    setSliders((prev) => {
-      const copy = [...prev];
-      copy[selectedSliderIndex].imageUrl = imageUrl;
-      return copy;
-    });
-    setShowGallery(false);
+  const onFileChange = async (e) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
+    setMessage("Resim yükleniyor...");
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await axiosInstance.post("/slider/upload-image", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (selectedIndex === null) return;
+      setSliders((prev) => {
+        const copy = [...prev];
+        copy[selectedIndex].imageUrl = res.data.imageUrl;
+        return copy;
+      });
+      setMessage("Resim yüklendi.");
+    } catch (err) {
+      console.error(err);
+      setMessage("Resim yüklenirken hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const selectSavedSlider = (index) => {
-    setSelectedSliderIndex(index);
-    setActiveTabs((prev) => ({ ...prev, [index]: "tr" }));
+  const closeSettings = () => {
+    setSelectedIndex(null);
+    setMessage("");
   };
-
-  const editingSlider =
-    selectedSliderIndex !== null ? sliders[selectedSliderIndex] : null;
 
   return (
-    <div>
-      {sliders.filter((s) => s.id).length > 0 && (
-        <div className="mb-8 rounded">
-          <h2 className="text-xl font-bold mb-2">Kayıtlı Slider'lar</h2>
-          <p className="mb-4">Maksimum 3 adet slider eklenebilir.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {sliders
-              .map((slider, index) => ({ slider, index }))
-              .filter(({ slider }) => slider.id)
-              .map(({ slider, index }) => (
-                <div
-                  key={slider.id}
-                  className={`border rounded shadow p-2 cursor-pointer ${
-                    selectedSliderIndex === index
-                      ? "border-blue-600 bg-blue-100"
-                      : ""
-                  }`}
-                  onClick={() => selectSavedSlider(index)}
-                  title="Düzenlemek için tıklayın"
-                >
-                  <img
-                    src={slider.imageUrl}
-                    alt="slider"
-                    className="w-full h-100 object-cover rounded mb-2"
-                  />
-                  <p className="text-sm font-medium truncate">
-                    {slider.translations?.tr?.title || "Başlık (TR Yok)"}
-                  </p>
-                  <p className="text-xs text-gray-600 truncate">
-                    {slider.translations?.en?.title || "Title (EN Missing)"}
-                  </p>
-                </div>
-              ))}
-          </div>
+    <div className="space-y-8 min-h-screen">
+      <h2 className="text-2xl font-semibold text-left mb-4">
+        Slider Yönetimi ({language?.toUpperCase() || "TR"})
+      </h2>
+      <p className="italic text-lg">Maksimum 3 adet slider eklenebilir.</p>
+
+      {message && (
+        <div className="bg-yellow-100 text-yellow-900 p-3 rounded-md mb-6">
+          {message}
         </div>
       )}
 
-      {/* Düzenleme alanı */}
-      {editingSlider ? (
-        <div className="border p-4 my-4 rounded shadow w-1/2">
-          <img
-            src={editingSlider.imageUrl || "/"}
-            alt="slider"
-            className=" h-100 object-contain mb-2"
-          />
-          <label>Image URL (Cloudinary’den seçilecek)</label>
-          <div className="flex">
-            <input
-              type="text"
-              value={editingSlider.imageUrl || ""}
-              onChange={(e) => handleInputChange("imageUrl", e.target.value)}
-              className="border px-2 py-1 rounded mb-2 mr-1 w-1/2"
-            />
+      <div className="flex w-full gap-8">
+        {/* Slider Listesi */}
+        <div
+          className="flex flex-col space-y-6 w-1/3 transition cursor-pointer"
+          style={{ flexShrink: 0, maxHeight: "100vh" }}
+        >
+          {/* Yeni Slider Ekle */}
+          {sliders.length < 3 && (
             <button
-              onClick={openGallery}
-              className="bg-indigo-600 text-white px-3 py-1 rounded mb-2"
+              onClick={addNewSlider}
+              className="flex items-center justify-center border border-dashed border-white cursor-pointer rounded-2xl h-40 text-white hover:text-red-500 hover:border-red-500 transition"
+              title="Yeni Slider Ekle"
+              disabled={loading}
             >
-              Görsel Seç
+              + Yeni Slider
             </button>
-          </div>
+          )}
 
-          {/* TR/EN Sekmeli İçerik */}
-          <div className="mb-4">
-            <div className="flex mb-2">
-              <button
-                onClick={() => handleTabChange("tr")}
-                className={`px-4 py-1 rounded-t ${
-                  (activeTabs[selectedSliderIndex] || "tr") === "tr"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200"
-                }`}
-              >
-                Türkçe
-              </button>
-              <button
-                onClick={() => handleTabChange("en")}
-                className={`px-4 py-1 rounded-t ${
-                  (activeTabs[selectedSliderIndex] || "tr") === "en"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200"
-                }`}
-              >
-                English
-              </button>
-            </div>
-
-            <div className="rounded bg-gray-50">
-              <h3 className="font-semibold mb-2">
-                {(activeTabs[selectedSliderIndex] || "tr") === "tr"
-                  ? "Türkçe İçerik"
-                  : "English Content"}
-              </h3>
-
-              <label>Title</label>
-              <input
-                type="text"
-                value={
-                  editingSlider.translations?.[
-                    activeTabs[selectedSliderIndex] || "tr"
-                  ]?.title || ""
-                }
-                onChange={(e) =>
-                  handleTranslationChange(
-                    activeTabs[selectedSliderIndex] || "tr",
-                    "title",
-                    e.target.value
-                  )
-                }
-                className="border px-2 py-1 rounded w-full mb-2"
-              />
-
-              <label>Description</label>
-              <textarea
-                value={
-                  editingSlider.translations?.[
-                    activeTabs[selectedSliderIndex] || "tr"
-                  ]?.description || ""
-                }
-                onChange={(e) =>
-                  handleTranslationChange(
-                    activeTabs[selectedSliderIndex] || "tr",
-                    "description",
-                    e.target.value
-                  )
-                }
-                className="border px-2 py-1 rounded w-full mb-2"
-              />
-
-              <label>Button 1 Text</label>
-              <input
-                type="text"
-                value={
-                  editingSlider.translations?.[
-                    activeTabs[selectedSliderIndex] || "tr"
-                  ]?.button1Text || ""
-                }
-                onChange={(e) =>
-                  handleTranslationChange(
-                    activeTabs[selectedSliderIndex] || "tr",
-                    "button1Text",
-                    e.target.value
-                  )
-                }
-                className="border px-2 py-1 rounded w-full mb-2"
-              />
-
-              <label>Button 2 Text</label>
-              <input
-                type="text"
-                value={
-                  editingSlider.translations?.[
-                    activeTabs[selectedSliderIndex] || "tr"
-                  ]?.button2Text || ""
-                }
-                onChange={(e) =>
-                  handleTranslationChange(
-                    activeTabs[selectedSliderIndex] || "tr",
-                    "button2Text",
-                    e.target.value
-                  )
-                }
-                className="border px-2 py-1 rounded w-full mb-2"
-              />
-            </div>
-          </div>
-
-          {/* URL alanları */}
-          <label>Button 1 URL</label>
-          <input
-            type="text"
-            value={editingSlider.button1Url || ""}
-            onChange={(e) => handleInputChange("button1Url", e.target.value)}
-            className="border px-2 py-1 rounded w-full mb-2"
-          />
-          <label>Button 2 URL</label>
-          <input
-            type="text"
-            value={editingSlider.button2Url || ""}
-            onChange={(e) => handleInputChange("button2Url", e.target.value)}
-            className="border px-2 py-1 rounded w-full mb-2"
-          />
-
-          {/* Aksiyon Butonları */}
-          <div className="flex space-x-2 mt-4">
-            {!editingSlider.id && (
-              <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
-                onClick={() => handleSave(editingSlider)}
-              >
-                Kaydet
-              </button>
-            )}
-            {editingSlider.id && (
-              <button
-                className="bg-yellow-600 text-white px-4 py-2 rounded"
-                onClick={() => handleUpdate(editingSlider)}
-              >
-                Güncelle
-              </button>
-            )}
-            {editingSlider.id && (
-              <button
-                className="bg-red-600 text-white px-4 py-2 rounded"
-                onClick={() => handleDelete(editingSlider.id)}
-              >
-                Sil
-              </button>
-            )}
-          </div>
-        </div>
-      ) : (
-        // Eğer seçili slider yoksa, Yeni Slider Ekle butonu gösterelim
-        sliders.filter((s) => !s.id).length < 3 && (
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
-            onClick={() => {
-              setSliders([
-                ...sliders,
-                {
-                  id: null,
-                  imageUrl: "",
-                  button1Url: "",
-                  button2Url: "",
-                  translations: {
-                    tr: {
-                      title: "",
-                      description: "",
-                      button1Text: "",
-                      button2Text: "",
-                    },
-                    en: {
-                      title: "",
-                      description: "",
-                      button1Text: "",
-                      button2Text: "",
-                    },
-                  },
-                },
-              ]);
-              setSelectedSliderIndex(sliders.length);
-              setActiveTabs((prev) => ({ ...prev, [sliders.length]: "tr" }));
-            }}
-          >
-            Yeni Slider Ekle
-          </button>
-        )
-      )}
-
-      {/* Galeri Modal */}
-      {showGallery && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg overflow-auto max-h-[80vh] w-full max-w-5xl p-4 relative">
-            <button
-              onClick={() => setShowGallery(false)}
-              className="absolute top-2 right-4 text-3xl font-bold"
-              title="Kapat"
-            >
-              &times;
-            </button>
-            <h3 className="text-xl font-bold mb-4">Galeriden Fotoğraf Seç</h3>
-            {galleryLoading ? (
+          {/* Slider Kartlar */}
+          {loading ? (
+            <div className="flex items-center justify-center w-full h-32">
               <p>Yükleniyor...</p>
-            ) : galleryImages.length === 0 ? (
-              <p>Galeri boş</p>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {galleryImages.map((img) => (
-                  <div
-                    key={img.id}
-                    className="cursor-pointer border rounded overflow-hidden hover:shadow-lg"
-                    onClick={() => selectImage(img.imageUrl)}
-                  >
-                    <img
-                      src={img.imageUrl}
-                      alt={img.title}
-                      className="w-full h-32 object-cover"
-                    />
-                    <p className="text-center text-sm p-1 truncate">
-                      {img.title}
-                    </p>
-                  </div>
-                ))}
+            </div>
+          ) : sliders.length === 0 ? (
+            <div className="flex items-center justify-center w-full h-32 text-gray-400 italic">
+              <p>Slider bulunamadı.</p>
+            </div>
+          ) : (
+            sliders.map((slider, i) => (
+              <div
+                key={slider.id || `new-${i}`}
+                onClick={() => setSelectedIndex(i)}
+                className={`relative border-4 rounded-3xl transition-transform duration-300 ease-in-out
+                  ${
+                    selectedIndex === i
+                      ? "border-red-700 scale-105"
+                      : "border-red-300 hover:border-red-500"
+                  }
+                `}
+                title={slider.translations?.[language]?.title || "Başlık yok"}
+              >
+                <img
+                  src={slider.imageUrl || "/placeholder.png"}
+                  alt="slider"
+                  className="object-fill aspect-video rounded-2xl"
+                  draggable={false}
+                />
               </div>
-            )}
-          </div>
+            ))
+          )}
         </div>
-      )}
+
+        {/* Ayar Paneli */}
+        {!selectedSlider && (
+          <div
+            className="flex justify-center items-center w-2/3 border-2 border-dashed border-gray-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+            style={{ maxHeight: "100vh", overflowY: "auto" }}
+          >
+            <h1 className="text-gray-500 text-xl font-medium">
+              Ayarlamak için bir slider seçin.
+            </h1>
+          </div>
+        )}
+
+        {selectedSlider && (
+          <div className="relative w-2/3 border border-gray-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition max-h-[100vh] overflow-y-auto space-y-6">
+            {/* Kapatma butonu */}
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={closeSettings}
+                className="text-white hover:scale-120 text-3xl bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 cursor-pointer font-bold rounded-full w-10 h-10 flex items-center justify-center transition"
+                aria-label="Kapat"
+                title="Kapat"
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Resim Yükleme */}
+            <div>
+              <label className="block font-semibold mb-2">Slider Resmi</label>
+              <img
+                src={selectedSlider.imageUrl || "/placeholder.png"}
+                alt="Seçili slider"
+                className="w-full max-h-64 object-contain rounded-2xl mb-4"
+                draggable={false}
+              />
+
+              <input
+                id="fileInput"
+                type="file"
+                accept="image/*"
+                onChange={onFileChange}
+                className="hidden"
+                disabled={loading}
+              />
+
+              <label
+                htmlFor="fileInput"
+                className="inline-block border px-4 py-2 text-white bg-red-500 hover:bg-red-950 cursor-pointer rounded select-none"
+              >
+                Dosya Seç
+              </label>
+            </div>
+
+            {/* Metin ve URL alanları */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block font-semibold mb-1">Başlık</label>
+                <input
+                  type="text"
+                  value={selectedSlider.translations?.[language]?.title || ""}
+                  onChange={(e) =>
+                    updateTranslationField("title", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  disabled={loading}
+                />
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1">Açıklama</label>
+                <textarea
+                  rows={3}
+                  value={
+                    selectedSlider.translations?.[language]?.description || ""
+                  }
+                  onChange={(e) =>
+                    updateTranslationField("description", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  disabled={loading}
+                />
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1">
+                  Buton 1 Metni
+                </label>
+                <input
+                  type="text"
+                  value={
+                    selectedSlider.translations?.[language]?.button1Text || ""
+                  }
+                  onChange={(e) =>
+                    updateTranslationField("button1Text", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  disabled={loading}
+                />
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1">Buton 1 URL</label>
+                <input
+                  type="text"
+                  value={selectedSlider.button1Url || ""}
+                  onChange={(e) =>
+                    updateSliderField("button1Url", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  disabled={loading}
+                />
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1">
+                  Buton 2 Metni
+                </label>
+                <input
+                  type="text"
+                  value={
+                    selectedSlider.translations?.[language]?.button2Text || ""
+                  }
+                  onChange={(e) =>
+                    updateTranslationField("button2Text", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  disabled={loading}
+                />
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1">Buton 2 URL</label>
+                <input
+                  type="text"
+                  value={selectedSlider.button2Url || ""}
+                  onChange={(e) =>
+                    updateSliderField("button2Url", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            {/* Butonlar */}
+            <div className="flex gap-4 justify-end">
+              {!selectedSlider.id ? (
+                <button
+                  onClick={saveSlider}
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-2xl transition shadow"
+                  disabled={loading}
+                >
+                  Kaydet
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={updateSlider}
+                    className="bg-yellow-600 cursor-pointer hover:bg-yellow-700 text-white px-6 py-2 rounded-2xl transition shadow"
+                    disabled={loading}
+                  >
+                    Güncelle
+                  </button>
+                  <button
+                    onClick={deleteSlider}
+                    className="bg-red-500 hover:bg-red-900 cursor-pointer text-white px-6 py-2 rounded-2xl transition shadow"
+                    disabled={loading}
+                  >
+                    Sil
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -24,9 +24,10 @@ const SeoSettings = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6 w-2/3">
+    <div className="p-6 text-white rounded-2xl shadow-md border border-white space-y-6 w-2/3 mx-auto hover:shadow-lg transition-shadow duration-300">
       <h2 className="text-xl font-bold">SEO Ayarları</h2>
-      <label className="font-medium text-l text-gray-700">
+
+      <label className="block font-semibold">
         Başlık (Şirket ismi geçmeli, 50-60 karakter arası ideal)
       </label>
       <input
@@ -35,9 +36,10 @@ const SeoSettings = () => {
         value={seo.title}
         onChange={handleChange}
         placeholder="Title"
-        className="border p-2 w-full rounded"
+        className="border border-white p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
       />
-      <label className="font-medium text-l text-gray-700">
+
+      <label className="block font-semibold">
         Açıklama (120-150 karakter arası ideal)
       </label>
       <textarea
@@ -45,9 +47,11 @@ const SeoSettings = () => {
         value={seo.description}
         onChange={handleChange}
         placeholder="Description"
-        className="border p-2 w-full rounded"
+        className="border border-white p-3 rounded w-full resize-none focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+        rows={4}
       />
-      <label className="font-medium text-l text-gray-700">
+
+      <label className="block font-semibold">
         Keywords (Virgülle ayırın, 15-20 kelime arası ideal)
       </label>
       <input
@@ -56,11 +60,12 @@ const SeoSettings = () => {
         value={seo.keywords}
         onChange={handleChange}
         placeholder="Keywords (virgülle ayır)"
-        className="border p-2 w-full rounded"
+        className="border border-white p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
       />
+
       <button
         onClick={handleSave}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-red-500 hover:bg-[#c62121] cursor-pointer text-white px-5 py-2 rounded transition"
       >
         Kaydet
       </button>

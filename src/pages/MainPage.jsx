@@ -3,13 +3,10 @@ import Experience from "../components/site/Experience";
 import OurServices from "../components/site/OurServices";
 import ProjectsMainPage from "../components/site/ProjectsMainPage";
 import SliderComponent from "../components/site/SliderComponent";
-import ContactForm from "../components/site/ContactForm";
-import CompanyInfo from "../components/site/CompanyInfo";
 import PageContent from "../layouts/PageContent";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
 import References from "../components/site/ReferencesAboutPage";
-import FadeContent from "../components/site/FadeContent";
 import BottomContact from "../components/site/BottomContact";
 
 function MainPage() {

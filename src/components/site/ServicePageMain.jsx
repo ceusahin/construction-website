@@ -1,4 +1,4 @@
-import FadeContent from "./FadeContent";
+import FadeContent from "../../utils/FadeContent";
 import ServiceCardServicePage from "./ServiceCardServicePage";
 
 function ServicePageMain() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SwitchOnOff from "./SwitchOnOff";
+import SwitchOnOff from "../../utils/SwitchOnOff";
 import axiosInstance from "../../api/axiosInstance";
 
 const SocialMediaSettings = () => {
@@ -49,16 +49,22 @@ const SocialMediaSettings = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6 w-2/3">
+    <div className="p-6 text-white rounded-2xl shadow-md border border-white space-y-6 w-2/3 mx-auto hover:shadow-lg transition-shadow duration-300">
       <h2 className="text-lg font-bold">Sosyal Medya Ayarları</h2>
-      <p>URL adresini "https://(URL adresiniz)" şeklinde girin.</p>
+      <p className="text-sm mb-4">
+        URL adresini "https://(URL adresiniz)" şeklinde girin.
+      </p>
       {settings.map((s) => (
-        <div key={s.platform} className="flex items-center space-x-4">
-          <span className="w-24 capitalize">{s.platform}</span>
+        <div
+          key={s.platform}
+          className="flex items-center space-x-4 px-4 py-3 rounded-md border border-white"
+        >
+          <span className="w-24 capitalize font-semibold">{s.platform}</span>
           <input
             type="text"
-            className="border px-2 py-1 rounded w-80"
+            className="border border-white text-black bg-gray-50 px-3 py-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
             value={s.url}
+            placeholder="URL"
             onChange={(e) => handleUrlChange(s.platform, e.target.value)}
           />
           <SwitchOnOff

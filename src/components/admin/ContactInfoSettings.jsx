@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
+import SwitchOnOff from "../../utils/SwitchOnOff";
+import useLanguage from "../../contexts/useLanguage";
 
-const LANGUAGES = ["tr", "en"];
 const NEW_KEY = "new"; // null id için key
 
 const ContactInfoSettings = () => {
   const [contactInfos, setContactInfos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeLangTabs, setActiveLangTabs] = useState({});
+
+  const { language } = useLanguage();
 
   useEffect(() => {
     fetchContactInfos();
@@ -21,12 +23,6 @@ const ContactInfoSettings = () => {
         ? res.data
         : res.data.data || [];
       setContactInfos(dataArray);
-
-      const langTabs = {};
-      dataArray.forEach((info) => {
-        langTabs[info.id] = "tr";
-      });
-      setActiveLangTabs(langTabs);
     } catch (err) {
       console.error("Fetch error:", err);
     } finally {
@@ -34,15 +30,17 @@ const ContactInfoSettings = () => {
     }
   };
 
-  const handleTranslationChange = (infoId, lang, field, value) => {
+  const handleTranslationChange = (infoId, field, value) => {
     setContactInfos((prev) =>
       prev.map((info) => {
         const key = info.id === null ? NEW_KEY : info.id;
         if (key !== (infoId === null ? NEW_KEY : infoId)) return info;
+
+        // Sadece aktif dil için güncelle
         return {
           ...info,
           translations: info.translations.map((t) =>
-            t.language === lang ? { ...t, [field]: value } : t
+            t.language === language ? { ...t, [field]: value } : t
           ),
         };
       })
@@ -93,11 +91,9 @@ const ContactInfoSettings = () => {
 
   const handleDelete = async (info) => {
     if (!info.id) {
-      // Henüz kaydedilmemiş yeni öğeyi frontendden sil
       setContactInfos((prev) => prev.filter((item) => item !== info));
       return;
     }
-
     if (
       window.confirm("Bu iletişim bilgisini silmek istediğinize emin misiniz?")
     ) {
@@ -105,7 +101,6 @@ const ContactInfoSettings = () => {
         await axiosInstance.delete(`/contact-info/${info.id}`);
         alert("Silindi");
         setContactInfos((prev) => prev.filter((item) => item.id !== info.id));
-        // Aktif dil sekmesi ayarlarını da temizleyebilirsin istersen
       } catch (error) {
         console.error("Silme hatası:", error);
         alert("Silme sırasında hata oluştu.");
@@ -114,36 +109,23 @@ const ContactInfoSettings = () => {
   };
 
   const handleAddNew = () => {
-    // Mevcut tipleri topla
     const usedTypes = contactInfos.map((info) => info.type);
-
-    // Kullanılmayan ilk type'ı bul (öncelik PHONE, EMAIL, ADDRESS, WORK_HOURS)
     const allTypes = ["PHONE", "EMAIL", "ADDRESS", "WORK_HOURS"];
     const availableType = allTypes.find((t) => !usedTypes.includes(t));
-
     if (!availableType) {
       alert("Tüm türler zaten kullanılıyor, yeni bilgi ekleyemezsiniz.");
       return;
     }
-
     const newInfo = {
       id: null,
       type: availableType,
       isActive: true,
-      translations: LANGUAGES.map((lang) => ({
-        language: lang,
-        title: "",
-        content: "",
-      })),
+      translations: [
+        { language: "tr", title: "", content: "" },
+        { language: "en", title: "", content: "" },
+      ],
     };
-
     setContactInfos((prev) => [newInfo, ...prev]);
-    setActiveLangTabs((prev) => ({ ...prev, [NEW_KEY]: "tr" }));
-  };
-
-  const handleLangTabClick = (infoId, lang) => {
-    const key = infoId === null ? NEW_KEY : infoId;
-    setActiveLangTabs((prev) => ({ ...prev, [key]: lang }));
   };
 
   if (loading)
@@ -154,13 +136,13 @@ const ContactInfoSettings = () => {
     );
 
   return (
-    <div className="max-w-5xl my-8">
-      <h2 className="text-xl font-bold mb-4">İletişim Bilgileri Yönetimi</h2>
-
-      <div className="mb-4">
+    <div className="w-full mt-20 mx-auto text-white">
+      <h2 className="text-2xl font-bold mb-4">İletişim Bilgileri Yönetimi</h2>
+      <p className="mb-6 italic">Maksimum 4 adet eklenebilir.</p>
+      <div className="mb-6">
         <button
           onClick={handleAddNew}
-          className="bg-blue-600 text-white px-4 py-2 rounded mb-2"
+          className="bg-red-500 cursor-pointer text-white px-5 py-2 rounded-lg shadow hover:bg-[#c62121] transition"
         >
           Yeni Bilgi Ekle
         </button>
@@ -173,18 +155,24 @@ const ContactInfoSettings = () => {
       <div className="flex flex-wrap gap-6">
         {contactInfos.map((info) => {
           const key = info.id === null ? NEW_KEY : info.id;
+
+          // Sadece aktif dilin translation verisini al
+          const currentTrans = info.translations.find(
+            (t) => t.language === language
+          ) || { title: "", content: "" };
+
           return (
             <div
               key={key}
-              className="w-full sm:w-[48%] bg-white rounded-lg shadow-md p-6 border border-gray-200"
+              className="w-full sm:w-[48%] rounded-2xl shadow-lg p-6 border border-gray-200"
             >
-              <div className="flex flex-wrap items-center gap-6 mb-4">
-                <label className="font-semibold min-w-[100px] flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-6 mb-5">
+                <label className="font-semibold min-w-[110px] flex items-center gap-2">
                   Tür:
                   <select
                     value={info.type}
                     onChange={(e) => handleTypeChange(info.id, e.target.value)}
-                    className="ml-2 border border-gray-300 rounded-md px-2 py-1 text-sm"
+                    className="ml-3 border text-white bg-[#101010] cursor-pointer border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 transition"
                   >
                     <option value="PHONE">Telefon</option>
                     <option value="EMAIL">Email</option>
@@ -193,89 +181,50 @@ const ContactInfoSettings = () => {
                   </select>
                 </label>
 
-                <label className="flex items-center gap-2 font-semibold cursor-pointer select-none">
-                  <input
-                    type="checkbox"
+                <label className="flex items-center gap-3 font-semibold cursor-pointer select-none">
+                  Görünürlük:
+                  <SwitchOnOff
                     checked={info.isActive}
                     onChange={() => handleIsActiveToggle(info.id)}
-                    className="w-5 h-5 cursor-pointer"
                   />
-                  Aktif
                 </label>
               </div>
 
-              {/* Dil Sekmeleri */}
-              <div className="border-b-2 border-blue-600 flex gap-4 mb-4">
-                {LANGUAGES.map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => handleLangTabClick(info.id, lang)}
-                    className={`px-5 py-2 font-medium rounded-t-md cursor-pointer transition-colors duration-200 ${
-                      activeLangTabs[key] === lang
-                        ? "bg-blue-600 text-white border-b-4 border-blue-800"
-                        : "bg-transparent text-blue-600 hover:bg-blue-100"
-                    }`}
-                  >
-                    {lang.toUpperCase()}
-                  </button>
-                ))}
+              <div className="mb-5">
+                <label className="block font-semibold mb-2">Başlık</label>
+                <input
+                  type="text"
+                  value={currentTrans.title}
+                  onChange={(e) =>
+                    handleTranslationChange(info.id, "title", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                />
               </div>
 
-              {/* Aktif dil içerik formu */}
-              {info.translations
-                .filter((t) => t.language === activeLangTabs[key])
-                .map((trans) => (
-                  <div key={trans.language}>
-                    <div className="mb-4">
-                      <label className="block font-semibold mb-1">
-                        Başlık:
-                      </label>
-                      <input
-                        type="text"
-                        value={trans.title}
-                        onChange={(e) =>
-                          handleTranslationChange(
-                            info.id,
-                            trans.language,
-                            "title",
-                            e.target.value
-                          )
-                        }
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block font-semibold mb-1">
-                        İçerik:
-                      </label>
-                      <textarea
-                        value={trans.content}
-                        onChange={(e) =>
-                          handleTranslationChange(
-                            info.id,
-                            trans.language,
-                            "content",
-                            e.target.value
-                          )
-                        }
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm resize-y focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        rows={4}
-                      />
-                    </div>
-                  </div>
-                ))}
+              <div className="mb-6">
+                <label className="block font-semibold mb-2">İçerik</label>
+                <textarea
+                  value={currentTrans.content}
+                  onChange={(e) =>
+                    handleTranslationChange(info.id, "content", e.target.value)
+                  }
+                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-lg px-4 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                  rows={4}
+                />
+              </div>
 
-              <div className="flex gap-4 mt-4">
+              <div className="flex gap-5">
                 <button
                   onClick={() => handleSave(info)}
-                  className="bg-green-600 hover:bg-green-800 text-white px-6 py-3 rounded-md text-lg transition-colors duration-300"
+                  className="bg-green-600 cursor-pointer hover:bg-green-800 text-white px-6 py-3 rounded-lg shadow-md transition"
                 >
                   Kaydet
                 </button>
 
                 <button
                   onClick={() => handleDelete(info)}
-                  className="bg-red-600 hover:bg-red-800 text-white px-6 py-3 rounded-md text-lg transition-colors duration-300"
+                  className="bg-red-500 hover:bg-[#c62121] cursor-pointer text-white px-6 py-3 rounded-lg shadow-md transition"
                 >
                   Sil
                 </button>

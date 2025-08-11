@@ -1,5 +1,5 @@
-import FadeContent from "./FadeContent";
-import MoreButton from "./MoreButton";
+import FadeContent from "../../utils/FadeContent";
+import MoreButton from "../../utils/MoreButton";
 import OurServicesCard from "./OurServicesCard";
 
 function OurServices() {

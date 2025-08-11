@@ -9,20 +9,27 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import BlogPage from "./pages/BlogPage";
 import ReferencesPage from "./pages/ReferencesPage";
 import ContactPage from "./pages/ContactPage";
+import FaviconUpdater from "./components/site/FaviconUpdater";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/hakkimizda" element={<AboutUs />} />
-      <Route path="/hizmetlerimiz" element={<ServicePage />} />
-      <Route path="/projelerimiz" element={<ProjectsPage />} />
-      <Route path="/projelerimiz/:id" element={<ProjectDetailPage />} />
-      <Route path="/blog" element={<BlogPage />} />
-      <Route path="/referanslarimiz" element={<ReferencesPage />} />
-      <Route path="/iletisim" element={<ContactPage />} />
-      <Route path="/admin" element={<Panel />} />
-    </Routes>
+    <>
+      {/* <div className="text-red-500 font-bold text-3xl p-4">
+        Eğer bu kırmızı, büyük ve kalınsa Tailwind çalışıyor demektir.
+      </div> */}
+      <FaviconUpdater />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/hakkimizda" element={<AboutUs />} />
+        <Route path="/hizmetlerimiz" element={<ServicePage />} />
+        <Route path="/projelerimiz" element={<ProjectsPage />} />
+        <Route path="/projelerimiz/:id" element={<ProjectDetailPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/referanslarimiz" element={<ReferencesPage />} />
+        <Route path="/iletisim" element={<ContactPage />} />
+        <Route path="/admin" element={<Panel />} />
+      </Routes>
+    </>
   );
 }
 

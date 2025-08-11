@@ -1,4 +1,4 @@
-import CountUp from "./CountUp";
+import CountUp from "../../utils/CountUp";
 
 function Experience() {
   return (

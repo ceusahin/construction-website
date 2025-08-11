@@ -1,220 +1,273 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "../../api/axiosInstance";
 import useLanguage from "../../contexts/useLanguage";
 
 const FooterSettings = () => {
   const { language } = useLanguage();
+
   const [menus, setMenus] = useState([]);
   const [selectedMenuId, setSelectedMenuId] = useState(null);
-  const [title, setTitle] = useState("");
-  const [items, setItems] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+
+  const [showNewMenuInput, setShowNewMenuInput] = useState(false);
+  const [newMenuTitle, setNewMenuTitle] = useState("");
+
   const [newItem, setNewItem] = useState({ name: "", url: "" });
 
-  const fetchMenus = () => {
-    axios
-      .get(`/footer-menu/${language}`)
-      .then((res) => {
-        setMenus(res.data);
-        // Seçili menüyü dil değişiminde temizlemek için:
-        setSelectedMenuId(null);
-        setItems([]);
-      })
-      .catch((err) => console.error("Menüleri getirirken hata:", err));
+  const [message, setMessage] = useState("");
+
+  const loadMenuItems = async (menuId) => {
+    try {
+      const res = await axios.get(`/footer-menu-item/by-menu/${menuId}`);
+      setMenuItems(res.data);
+      setMessage("");
+    } catch {
+      setMenuItems([]);
+      setMessage("Menü öğeleri yüklenirken hata oluştu.");
+    }
   };
 
-  const fetchItems = (menuId) => {
-    axios
-      .get(`/footer-menu-item/by-menu/${menuId}`)
-      .then((res) => {
-        setItems(res.data);
-      })
-      .catch((err) => {
-        setItems([]);
-        console.error("Menü öğelerini getirirken hata:", err);
-      });
-  };
-
-  useEffect(() => {
-    fetchMenus();
-    setTitle("");
+  const loadMenus = useCallback(async () => {
+    try {
+      const res = await axios.get(`/footer-menu/${language}`);
+      setMenus(res.data);
+      setSelectedMenuId(null);
+      setMenuItems([]);
+      setMessage("");
+    } catch {
+      setMessage("Menüler yüklenirken hata oluştu.");
+    }
   }, [language]);
 
-  const handleCreateMenu = () => {
-    if (!title.trim()) {
-      alert("Lütfen bir menü başlığı girin.");
+  useEffect(() => {
+    if (language) loadMenus();
+  }, [language, loadMenus]);
+
+  const addMenu = async () => {
+    if (!newMenuTitle.trim()) {
+      setMessage("Lütfen menü başlığı girin.");
       return;
     }
-    axios
-      .post("/footer-menu", { language, title })
-      .then(() => {
-        setTitle("");
-        fetchMenus();
-      })
-      .catch((err) => console.error("Menü oluşturulurken hata:", err));
+    try {
+      await axios.post("/footer-menu", {
+        language,
+        title: newMenuTitle.trim(),
+      });
+      setNewMenuTitle("");
+      setShowNewMenuInput(false);
+      loadMenus();
+      setMessage("Menü başarıyla eklendi.");
+    } catch {
+      setMessage("Menü eklenirken hata oluştu.");
+    }
   };
 
-  const handleDeleteMenu = (id) => {
-    axios
-      .delete(`/footer-menu/${id}`)
-      .then(() => {
-        if (id === selectedMenuId) {
-          setSelectedMenuId(null);
-          setItems([]);
-        }
-        fetchMenus();
-      })
-      .catch((err) => console.error("Menü silinirken hata:", err));
+  const deleteMenu = async (menuId) => {
+    if (!window.confirm("Bu menüyü silmek istediğinizden emin misiniz?"))
+      return;
+    try {
+      await axios.delete(`/footer-menu/${menuId}`);
+      if (menuId === selectedMenuId) {
+        setSelectedMenuId(null);
+        setMenuItems([]);
+      }
+      loadMenus();
+      setMessage("Menü silindi.");
+    } catch {
+      setMessage("Menü silinirken hata oluştu.");
+    }
   };
 
-  const handleAddItem = () => {
+  const addItem = async () => {
     if (!newItem.name.trim() || !newItem.url.trim()) {
-      alert("Lütfen öğe adı ve URL girin.");
+      setMessage("Öğe adı ve URL boş bırakılamaz.");
       return;
     }
-    axios
-      .post(`/footer-menu-item/${selectedMenuId}`, {
-        name: newItem.name,
-        url: newItem.url,
-      })
-      .then(() => {
-        setNewItem({ name: "", url: "" });
-        fetchItems(selectedMenuId);
-      })
-      .catch((err) => console.error("Öğe eklenirken hata:", err));
+    try {
+      await axios.post(`/footer-menu-item/${selectedMenuId}`, {
+        name: newItem.name.trim(),
+        url: newItem.url.trim(),
+      });
+      setNewItem({ name: "", url: "" });
+      loadMenuItems(selectedMenuId);
+      setMessage("Öğe başarıyla eklendi.");
+    } catch {
+      setMessage("Öğe eklenirken hata oluştu.");
+    }
   };
 
-  const handleDeleteItem = (id) => {
-    axios
-      .delete(`/footer-menu-item/${id}`)
-      .then(() => fetchItems(selectedMenuId))
-      .catch((err) => console.error("Öğe silinirken hata:", err));
+  const deleteItem = async (itemId) => {
+    if (!window.confirm("Bu öğeyi silmek istediğinizden emin misiniz?")) return;
+    try {
+      await axios.delete(`/footer-menu-item/${itemId}`);
+      loadMenuItems(selectedMenuId);
+      setMessage("Öğe silindi.");
+    } catch {
+      setMessage("Öğe silinirken hata oluştu.");
+    }
+  };
+
+  const closeContentPanel = () => {
+    setSelectedMenuId(null);
+    setMenuItems([]);
+    setMessage("");
   };
 
   return (
-    <div className="p-4 bg-white shadow-lg border-gray-400 border space-y-4 pb-6 md:w-2/3">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
-        Footer Menü Yönetimi ({language.toUpperCase()})
-      </h2>
+    <div className="w-2/3 mx-auto p-6 text-white rounded-2xl border border-white shadow-md hover:shadow-lg transition">
+      <h2 className="text-3xl font-bold mb-6">Footer Menü Yönetimi</h2>
 
-      {/* Yeni Menü Ekle */}
-      <div className="flex flex-col sm:flex-row gap-3 items-center">
-        <input
-          type="text"
-          placeholder="Yeni Menü Başlığı"
-          className="border border-gray-300 px-4 py-2 rounded flex-1"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleCreateMenu();
-          }}
-        />
-        <button
-          onClick={handleCreateMenu}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded transition"
-        >
-          ➕ Menü Ekle
-        </button>
-      </div>
-
-      {/* Mevcut Menüler */}
-      {menus.length === 0 ? (
-        <p className="text-gray-500">Henüz menü eklenmemiş.</p>
-      ) : (
-        <div className="space-y-3">
-          {menus.map((menu) => (
-            <div
-              key={menu.id}
-              className={`flex justify-between items-center px-4 py-3 rounded-md border ${
-                menu.id === selectedMenuId
-                  ? "border-blue-600 bg-blue-50"
-                  : "border-gray-200 bg-gray-50"
-              }`}
-            >
-              <div>
-                <p className="font-semibold text-gray-800">{menu.title}</p>
-                <p className="text-sm text-gray-500">
-                  Dil: {menu.language.toUpperCase()}
-                </p>
-              </div>
-              <div className="space-x-2">
-                <button
-                  onClick={() => {
-                    setSelectedMenuId(menu.id);
-                    fetchItems(menu.id);
-                  }}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded"
-                >
-                  ✏️ Düzenle
-                </button>
-                <button
-                  onClick={() => handleDeleteMenu(menu.id)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded"
-                >
-                  🗑 Sil
-                </button>
-              </div>
-            </div>
-          ))}
+      {message && (
+        <div className="mb-4 p-3 bg-red-100 text-red-600 rounded select-none">
+          {message}
         </div>
       )}
 
-      {/* Menü Öğeleri */}
-      {selectedMenuId && (
-        <div>
-          <h3 className="text-xl font-bold text-gray-800 mt-6 mb-4">
-            🔗 Menü Öğeleri
-          </h3>
+      <div
+        className={`flex gap-6 ${!selectedMenuId ? "flex-col" : "flex-row"}`}
+      >
+        {/* Sol panel: Menü Listesi */}
+        <div
+          className={`border border-white rounded-lg p-4 shadow-sm ${
+            selectedMenuId ? "w-1/3" : "w-full"
+          }`}
+        >
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => setShowNewMenuInput((v) => !v)}
+              className="bg-red-500 cursor-pointer hover:bg-[#c62121] text-white rounded px-4 py-2 transition w-full"
+            >
+              {showNewMenuInput ? "İptal" : "Menü Ekle"}
+            </button>
+          </div>
 
-          {items.length === 0 ? (
-            <p className="text-gray-500 mb-4">
-              Bu menüye ait öğe bulunmamaktadır.
-            </p>
+          {showNewMenuInput && (
+            <div className="mb-4">
+              <input
+                type="text"
+                placeholder="Yeni Menü Başlığı"
+                className="border border-white bg-gray-50 text-black rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+                value={newMenuTitle}
+                onChange={(e) => setNewMenuTitle(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") addMenu();
+                }}
+                autoFocus
+              />
+              <button
+                onClick={addMenu}
+                className="mt-2 bg-green-700 hover:bg-green-800 text-white rounded px-4 py-2 w-full transition"
+              >
+                Kaydet
+              </button>
+            </div>
+          )}
+
+          {menus.length === 0 ? (
+            <p className="text-gray-500 mt-4">Henüz menü yok.</p>
           ) : (
-            <ul className="space-y-3 mb-6">
-              {items.map((item) => (
+            <ul className="space-y-2 max-h-[400px] overflow-auto">
+              {menus.map((menu) => (
                 <li
-                  key={item.id}
-                  className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded"
+                  key={menu.id}
+                  onClick={() => {
+                    setSelectedMenuId(menu.id);
+                    loadMenuItems(menu.id);
+                  }}
+                  className={`cursor-pointer px-3 py-2 rounded-md border flex justify-between items-center transition ${
+                    menu.id === selectedMenuId
+                      ? "border-red-600 bg-[#101010] font-semibold"
+                      : "border-red-500 hover:bg-[#c62121]"
+                  }`}
                 >
-                  <div>
-                    <p className="font-medium text-gray-800">{item.name}</p>
-                    <p className="text-sm text-blue-600">{item.url}</p>
-                  </div>
+                  <span>{menu.title}</span>
                   <button
-                    onClick={() => handleDeleteItem(item.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteMenu(menu.id);
+                    }}
+                    className="text-gray-50 hover:text-gray-400 cursor-pointer text-2xl font-bold"
+                    title="Sil"
                   >
-                    🗑 Sil
+                    ×
                   </button>
                 </li>
               ))}
             </ul>
           )}
-
-          <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="text"
-              placeholder="Öğe Adı"
-              className="border border-gray-300 px-3 py-2 rounded w-full"
-              value={newItem.name}
-              onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="URL"
-              className="border border-gray-300 px-3 py-2 rounded w-full"
-              value={newItem.url}
-              onChange={(e) => setNewItem({ ...newItem, url: e.target.value })}
-            />
-            <button
-              onClick={handleAddItem}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded transition"
-            >
-              ➕ Öğeyi Ekle
-            </button>
-          </div>
         </div>
-      )}
+
+        {/* Sağ panel: Seçilen Menü İçeriği (2/3 genişlik) */}
+        {selectedMenuId && (
+          <div className="w-2/3 border border-gray-300 rounded-lg p-6 shadow-sm relative">
+            <button
+              onClick={closeContentPanel}
+              className="absolute top-3 right-3 text-red-500 hover:text-[#c62121] cursor-pointer text-3xl font-bold leading-none"
+              aria-label="İçerik panelini kapat"
+            >
+              ×
+            </button>
+
+            <h3 className="text-2xl font-bold mb-6">Menü Öğeleri</h3>
+
+            {menuItems.length === 0 ? (
+              <p className="text-gray-500 mb-6">
+                Bu menüye ait öğe bulunmamaktadır.
+              </p>
+            ) : (
+              <ul className="space-y-3 max-h-80 overflow-auto mb-6">
+                {menuItems.map((item) => (
+                  <li
+                    key={item.id}
+                    className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded"
+                  >
+                    <div>
+                      <p className="font-medium text-gray-800">{item.name}</p>
+                      <p className="text-sm text-blue-600 break-all">
+                        {item.url}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => deleteItem(item.id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+                      title="Öğeyi Sil"
+                    >
+                      🗑 Sil
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="text"
+                placeholder="Öğe Adı"
+                className="border border-gray-300 rounded px-3 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                value={newItem.name}
+                onChange={(e) =>
+                  setNewItem((prev) => ({ ...prev, name: e.target.value }))
+                }
+              />
+              <input
+                type="text"
+                placeholder="URL"
+                className="border border-gray-300 rounded px-3 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                value={newItem.url}
+                onChange={(e) =>
+                  setNewItem((prev) => ({ ...prev, url: e.target.value }))
+                }
+              />
+              <button
+                onClick={addItem}
+                className="bg-blue-600 hover:bg-blue-700 text-white rounded px-6 py-2 transition"
+              >
+                ➕ Öğeyi Ekle
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

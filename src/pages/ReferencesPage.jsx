@@ -1,7 +1,3 @@
-import CompanyInfo from "../components/site/CompanyInfo";
-import ContactForm from "../components/site/ContactForm";
-import FadeContent from "../components/site/FadeContent";
-import References from "../components/site/ReferencesAboutPage";
 import ReferencesPageMain from "../components/site/ReferencesPageMain";
 import Footer from "../layouts/Footer";
 import Header from "../layouts/Header";

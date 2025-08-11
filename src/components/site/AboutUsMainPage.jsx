@@ -1,5 +1,5 @@
 import { Construction, Hammer, HardHat } from "lucide-react";
-import FadeContent from "./FadeContent";
+import FadeContent from "../../utils/FadeContent";
 
 function AboutUsMainPage() {
   return (
