@@ -211,7 +211,7 @@ const SliderSettings = () => {
           {sliders.length < 3 && (
             <button
               onClick={addNewSlider}
-              className="flex items-center justify-center border border-dashed border-white cursor-pointer rounded-2xl h-40 text-white hover:text-red-500 hover:border-red-500 transition"
+              className="flex items-center justify-center border-2 border-dashed dark:border-gray-800 border-gray-400 cursor-pointer rounded-2xl h-40 dark:text-gray-500 text-gray-500 hover:text-red-500 hover:border-red-500 dark:hover:text-red-500 dark:hover:border-red-500"
               title="Yeni Slider Ekle"
               disabled={loading}
             >
@@ -237,7 +237,7 @@ const SliderSettings = () => {
                   ${
                     selectedIndex === i
                       ? "border-red-700 scale-105"
-                      : "border-red-300 hover:border-red-500"
+                      : "dark:border-gray-800 border-gray-300 hover:border-red-500 dark:hover:border-red-500"
                   }
                 `}
                 title={slider.translations?.[language]?.title || "Başlık yok"}
@@ -256,17 +256,17 @@ const SliderSettings = () => {
         {/* Ayar Paneli */}
         {!selectedSlider && (
           <div
-            className="flex justify-center items-center w-2/3 border-2 border-dashed border-gray-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+            className="flex justify-center items-center w-2/3 border-2 border-dashed dark:border-gray-800 border-gray-400 rounded-2xl p-6 shadow-sm hover:shadow-md"
             style={{ maxHeight: "100vh", overflowY: "auto" }}
           >
-            <h1 className="text-gray-500 text-xl font-medium">
+            <h1 className="text-gray-500 dark:text-gray-500 text-xl font-medium">
               Ayarlamak için bir slider seçin.
             </h1>
           </div>
         )}
 
         {selectedSlider && (
-          <div className="relative w-2/3 border border-gray-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition max-h-[100vh] overflow-y-auto space-y-6">
+          <div className="relative w-2/3 border dark:border-gray-800 border-gray-300 rounded-2xl p-6 shadow-sm hover:shadow-md transition max-h-[100vh] overflow-y-auto space-y-6">
             {/* Kapatma butonu */}
             <div className="flex justify-end mb-4">
               <button
@@ -282,9 +282,11 @@ const SliderSettings = () => {
 
             {/* Resim Yükleme */}
             <div>
-              <label className="block font-semibold mb-2">Slider Resmi</label>
+              <label className="block font-semibold mb-2 text-center">
+                Slider Resmi
+              </label>
               <img
-                src={selectedSlider.imageUrl || "/placeholder.png"}
+                src={selectedSlider.imageUrl || ""}
                 alt="Seçili slider"
                 className="w-full max-h-64 object-contain rounded-2xl mb-4"
                 draggable={false}
@@ -301,7 +303,7 @@ const SliderSettings = () => {
 
               <label
                 htmlFor="fileInput"
-                className="inline-block border px-4 py-2 text-white bg-red-500 hover:bg-red-950 cursor-pointer rounded select-none"
+                className="inline-block border border-[#c62121] px-4 py-2 text-white bg-red-500 hover:bg-[#c62121] cursor-pointer rounded select-none"
               >
                 Dosya Seç
               </label>
@@ -317,7 +319,7 @@ const SliderSettings = () => {
                   onChange={(e) =>
                     updateTranslationField("title", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className="w-full border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-black dark:text-white rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                   disabled={loading}
                 />
               </div>
@@ -332,7 +334,7 @@ const SliderSettings = () => {
                   onChange={(e) =>
                     updateTranslationField("description", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 bg-gray-50 text-black dark:text-white rounded-2xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                   disabled={loading}
                 />
               </div>
@@ -349,7 +351,7 @@ const SliderSettings = () => {
                   onChange={(e) =>
                     updateTranslationField("button1Text", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                   disabled={loading}
                 />
               </div>
@@ -362,7 +364,7 @@ const SliderSettings = () => {
                   onChange={(e) =>
                     updateSliderField("button1Url", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className="w-full border border-gray-300 dark:text-white dark:border-gray-700 dark:bg-gray-800 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                   disabled={loading}
                 />
               </div>
@@ -379,7 +381,7 @@ const SliderSettings = () => {
                   onChange={(e) =>
                     updateTranslationField("button2Text", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className="w-full border border-gray-300 dark:text-white dark:bg-gray-800 dark:border-gray-700 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                   disabled={loading}
                 />
               </div>
@@ -392,7 +394,7 @@ const SliderSettings = () => {
                   onChange={(e) =>
                     updateSliderField("button2Url", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  className="w-full border border-gray-300 dark:bg-gray-800 dark:text-white dark:border-gray-700 bg-gray-50 text-black rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                   disabled={loading}
                 />
               </div>

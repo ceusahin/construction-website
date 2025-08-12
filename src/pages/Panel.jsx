@@ -13,6 +13,7 @@ import ServiceSettings from "../components/admin/ServiceSettings";
 import ServiceTextSettings from "../components/admin/ServiceTextSettings";
 import AboutSectionSettings from "../components/admin/AboutSectionSettings";
 import LogoSettings from "../components/admin/UploadHeader";
+import PanelHeader from "../components/admin/PanelHeader";
 
 function Panel() {
   const [activePage, setActivePage] = useState("anasayfa");
@@ -37,11 +38,6 @@ function Panel() {
     { name: "AVM İnşaatı", startDate: "2025-06-15", status: "Tamamlandı" },
   ];
 
-  const servicesContextSettings = [
-    { label: "Başlık/Yazı İçerik Ayarları", key: "services-context" },
-    { label: "Hizmet Ekle/Çıkar/Düzenle", key: "services-card" },
-  ];
-
   const userSettings = [
     { label: "Kullanıcı Listesi", key: "user-list" },
     { label: "Kullanıcı Ekle", key: "add-user" },
@@ -49,7 +45,7 @@ function Panel() {
 
   return (
     <PageContent>
-      <div className="flex bg-[#101010]">
+      <div className="flex dark:bg-[#101010]">
         <Menu
           activePage={activePage}
           activeContentItem={activeContentItem}
@@ -77,7 +73,7 @@ function Panel() {
           {activeContentItem ? (
             <>
               {activeContentItem === "anasayfa-icerik" && (
-                <div className="p-14 space-y-6 text-white">
+                <div className="p-14 pt-30 space-y-6 dark:text-white">
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
                     <span className="">/</span>
@@ -93,7 +89,7 @@ function Panel() {
                 </div>
               )}
               {activeContentItem === "hakkimizda" && (
-                <div className="p-14 space-y-6 text-white">
+                <div className="p-14 pt-30 space-y-6 dark:text-white">
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
                     <span className="">/</span>
@@ -105,43 +101,17 @@ function Panel() {
                 </div>
               )}
               {activeContentItem === "hizmetlerimiz" && (
-                <div className="p-14 space-y-6">
+                <div className="p-14 space-y-6 pt-30 dark:text-white">
                   <div className="flex flex-row items-center gap-4">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
-                    <span className="text-gray-500">/</span>
+                    <span>/</span>
                     <h1 className="text-l font-light">İçerik Ayarları</h1>
-                    <span className="text-gray-500">/</span>
-                    <h1 className="text-xl font-bold text-gray-700">
-                      Hizmetlerimiz
-                    </h1>
+                    <span>/</span>
+                    <h1 className="text-xl font-bold">Hizmetlerimiz</h1>
                   </div>
-                  <div className="flex gap-4 mb-8">
-                    {servicesContextSettings.map((item) => (
-                      <button
-                        key={item.key}
-                        className={`px-4 py-2 rounded ${
-                          activeSiteSetting === item.key
-                            ? "bg-yellow-400 text-gray-900 font-semibold"
-                            : "bg-gray-200 text-gray-700"
-                        }`}
-                        onClick={() => setActiveSiteSetting(item.key)}
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                  <div>
-                    {activeSiteSetting === "services-context" && (
-                      <div className="flex flex-row gap-10">
-                        <ServiceTextSettings />
-                        <ServiceSettings />
-                      </div>
-                    )}
-                    {activeSiteSetting === "services-card" && (
-                      <div>
-                        <ServiceSettings />
-                      </div>
-                    )}
+                  <div className="flex flex-col items-center gap-20">
+                    <ServiceTextSettings />
+                    <ServiceSettings />
                   </div>
                 </div>
               )}
@@ -171,8 +141,8 @@ function Panel() {
                 />
               )}
               {activePage === "site-yonetimi" && (
-                <div className="p-6 space-y-6">
-                  <div className="flex flex-row items-center gap-4 text-white">
+                <div className="p-14 pt-30 space-y-6">
+                  <div className="flex flex-row items-center gap-4 dark:text-white">
                     <h1 className="text-l font-light">Yönetim Paneli</h1>
                     <span className="">/</span>
                     <h1 className="text-xl font-bold">Site Yönetimi</h1>
@@ -226,6 +196,9 @@ function Panel() {
             </>
           )}
         </div>
+      </div>
+      <div>
+        <PanelHeader />
       </div>
     </PageContent>
   );

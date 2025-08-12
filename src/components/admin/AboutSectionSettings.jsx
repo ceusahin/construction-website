@@ -199,16 +199,16 @@ const AboutSectionSettings = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full mx-auto text-white space-y-8"
+      className="w-full mx-auto dark:text-white space-y-8"
     >
       {/* Başlık */}
-      <h1 className="text-3xl font-bold mb-6">Hakkımızda Bölümü Yönetimi</h1>
+      <h1 className="text-2xl font-bold mb-6">Hakkımızda Bölümü Yönetimi</h1>
 
       {/* Bölümler */}
       <div className="flex flex-col md:flex-row gap-8">
         {/* Üst Bölüm */}
-        <section className="w-full md:w-1/2 p-6 border border-white rounded-lg shadow-sm text-black">
-          <h2 className="text-2xl font-semibold mb-4 text-white border-b pb-2">
+        <section className="w-full md:w-1/2 p-10 border border-gray-300 dark:border-gray-800 rounded-lg shadow-sm text-black">
+          <h2 className="text-xl font-semibold dark:text-white border-b border-gray-300 text-gray-500 pb-2 mb-10">
             Üst Bölüm
           </h2>
 
@@ -260,8 +260,8 @@ const AboutSectionSettings = () => {
         </section>
 
         {/* Alt Bölüm */}
-        <section className="w-full md:w-1/2 p-6 border border-white rounded-lg shadow-sm">
-          <h2 className="text-2xl font-semibold mb-4 text-white border-b pb-2">
+        <section className="w-full md:w-1/2 p-10 border dark:border-gray-800 border-gray-300 rounded-lg shadow-sm">
+          <h2 className="text-xl font-semibold dark:text-white border-b border-gray-300 text-gray-500 pb-2 mb-10">
             Alt Bölüm
           </h2>
 
@@ -295,8 +295,8 @@ const AboutSectionSettings = () => {
       </div>
 
       {/* YouTube Video ID Bölümü */}
-      <section className="w-full mx-auto p-6 text-white">
-        <h2 className="text-2xl font-semibold mb-3 border-b pb-2">
+      <section className="w-full mx-auto p-6 dark:text-white border border-gray-300 dark:border-gray-800 rounded-lg">
+        <h2 className="text-xl font-semibold mb-10 border-b border-gray-300 dark:text-white text-gray-500 pb-2">
           Üst ve Alt Bölüm Arasındaki YouTube Video ID
         </h2>
         <Input
@@ -352,27 +352,27 @@ const Input = ({
   placeholder,
 }) => (
   <label className="block mb-3">
-    <span className="font-semibold text-white">{label}</span>
+    <span className="font-semibold dark:text-white">{label}</span>
     <input
       type={type}
       name={name}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="mt-1 w-full border border-white text-black rounded-md px-3 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+      className="mt-1 w-full border border-gray-300 dark:border-gray-700 dark:text-white dark:bg-gray-800 text-black rounded-md px-3 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500"
     />
   </label>
 );
 
 const Textarea = ({ label, name, value, onChange, rows }) => (
   <label className="block mb-3">
-    <span className="font-semibold text-white">{label}</span>
+    <span className="font-semibold dark:text-white">{label}</span>
     <textarea
       name={name}
       value={value}
       onChange={onChange}
       rows={rows}
-      className="mt-1 w-full border border-white rounded-md px-3 py-2 resize-y bg-gray-50 text-black focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+      className="mt-1 w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-md px-3 py-2 resize-y bg-gray-50 text-black focus:outline-none focus:ring-2 focus:ring-red-500"
     />
   </label>
 );
@@ -387,13 +387,13 @@ const MediaSelector = ({
 
   return (
     <>
-      <label className="block font-semibold mt-6 mb-2 text-white">
+      <label className="block font-semibold mt-6 mb-2 dark:text-white">
         Medya Tipi
       </label>
       <select
         value={mediaType}
         onChange={onMediaTypeChange}
-        className="select select-bordered w-full max-w-xs border px-2 py-2 rounded-xl border-red-500 text-black bg-gray-50"
+        className="select select-bordered w-full max-w-xs border dark:border-gray-700 dark:bg-gray-800 dark:text-white px-2 py-2 rounded-xl border-red-500 text-black bg-gray-50"
       >
         <option value="IMAGE">Resim</option>
         <option value="VIDEO">Video</option>
@@ -401,7 +401,7 @@ const MediaSelector = ({
 
       {mediaType === "IMAGE" ? (
         <>
-          <label className="block font-semibold mt-4 mb-2 text-white">
+          <label className="block font-semibold mt-4 mb-2 dark:text-white">
             Resim Seç
           </label>
           <input
@@ -428,7 +428,7 @@ const MediaSelector = ({
         </>
       ) : (
         <>
-          <label className="block font-semibold mt-4 mb-2 text-white">
+          <label className="block font-semibold mt-4 mb-2 dark:text-white">
             Video Seç
           </label>
           <input

@@ -35,7 +35,7 @@ const UploadHeader = ({ title, fetchUrl, uploadUrl, deleteUrl }) => {
   };
 
   return (
-    <div className="text-white rounded-2xl w-1/2 shadow-md border border-white p-6 flex flex-col items-center gap-4 hover:shadow-lg transition ">
+    <div className="dark:text-white rounded-2xl w-1/2 shadow-md border border-gray-300 dark:border-gray-800 p-6 flex flex-col items-center gap-4 hover:shadow-lg ">
       <h2 className="text-lg font-semibold">{title}</h2>
 
       <div className="relative w-60 h-60 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center overflow-hidden bg-gray-50">

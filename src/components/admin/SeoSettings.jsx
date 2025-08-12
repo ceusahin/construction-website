@@ -24,7 +24,7 @@ const SeoSettings = () => {
   };
 
   return (
-    <div className="p-6 text-white rounded-2xl shadow-md border border-white space-y-6 w-2/3 mx-auto hover:shadow-lg transition-shadow duration-300">
+    <div className="p-6 dark:text-white rounded-2xl shadow-md border border-gray-300 dark:border-gray-800 space-y-6 w-2/3 mx-auto hover:shadow-lg">
       <h2 className="text-xl font-bold">SEO Ayarları</h2>
 
       <label className="block font-semibold">
@@ -36,7 +36,7 @@ const SeoSettings = () => {
         value={seo.title}
         onChange={handleChange}
         placeholder="Title"
-        className="border border-white p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+        className="border border-gray-300 p-3 dark:border-gray-700 dark:bg-gray-800 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
       />
 
       <label className="block font-semibold">
@@ -47,7 +47,7 @@ const SeoSettings = () => {
         value={seo.description}
         onChange={handleChange}
         placeholder="Description"
-        className="border border-white p-3 rounded w-full resize-none focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+        className="border border-gray-300 dark:border-gray-700 dark:bg-gray-800 p-3 rounded w-full resize-none focus:outline-none focus:ring-2 focus:ring-red-500 transition"
         rows={4}
       />
 
@@ -60,7 +60,7 @@ const SeoSettings = () => {
         value={seo.keywords}
         onChange={handleChange}
         placeholder="Keywords (virgülle ayır)"
-        className="border border-white p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+        className="border border-gray-300 dark:border-gray-700 dark:bg-gray-800 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-500 transition"
       />
 
       <button

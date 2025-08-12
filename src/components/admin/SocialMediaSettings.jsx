@@ -49,7 +49,7 @@ const SocialMediaSettings = () => {
   };
 
   return (
-    <div className="p-6 text-white rounded-2xl shadow-md border border-white space-y-6 w-2/3 mx-auto hover:shadow-lg transition-shadow duration-300">
+    <div className="p-6 dark:text-white rounded-2xl shadow-md border border-gray-300 dark:border-gray-800 space-y-6 w-2/3 mx-auto hover:shadow-lg">
       <h2 className="text-lg font-bold">Sosyal Medya Ayarları</h2>
       <p className="text-sm mb-4">
         URL adresini "https://(URL adresiniz)" şeklinde girin.
@@ -57,12 +57,12 @@ const SocialMediaSettings = () => {
       {settings.map((s) => (
         <div
           key={s.platform}
-          className="flex items-center space-x-4 px-4 py-3 rounded-md border border-white"
+          className="flex items-center space-x-4 px-4 py-3 rounded-md border border-gray-300 dark:border-gray-800"
         >
           <span className="w-24 capitalize font-semibold">{s.platform}</span>
           <input
             type="text"
-            className="border border-white text-black bg-gray-50 px-3 py-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+            className="border border-gray-300 dark:border-gray-700 text-black dark:text-white dark:bg-gray-800 bg-gray-50 px-3 py-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-red-500"
             value={s.url}
             placeholder="URL"
             onChange={(e) => handleUrlChange(s.platform, e.target.value)}

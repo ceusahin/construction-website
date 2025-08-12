@@ -1,4 +1,5 @@
 import LanguageSelector from "./LanguageSelector";
+import ThemeToggle from "../../utils/ThemeToggle";
 
 const menuItems = [
   { label: "Ana Sayfa", key: "anasayfa" },
@@ -20,16 +21,15 @@ const Menu = ({ onSelect, activePage, activeContentItem }) => {
   const isActive = (key) => activePage === key || activeContentItem === key;
 
   return (
-    <div className="fixed left-0 top-0 h-screen w-60 bg-black text-white shadow-lg z-50 flex flex-col px-6 pt-8 gap-8 overflow-y-auto">
+    <div className="fixed left-0 top-0 h-screen w-60 dark:bg-black bg-gray-700 text-white z-50 flex flex-col px-6 pt-8 gap-8 overflow-y-auto">
       <img
         src="/images/brsm-p-logo.webp"
         alt=""
         className="h-10 object-contain"
       />
-      <div className="text-xl font-bold tracking-wide text-center text-red-500">
+      <div className="text-xl font-bold tracking-wide text-center text-white dark:text-red-500">
         YÖNETİM PANELİ
       </div>
-      <LanguageSelector />
 
       {/* Menü */}
       <ul className="flex flex-col gap-2">

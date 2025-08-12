@@ -45,11 +45,8 @@ const CompanyInfoSettings = () => {
   };
 
   return (
-    <div className="p-6 rounded-2xl text-white shadow-md border border-white w-2/3 mx-auto hover:shadow-lg transition-shadow duration-300">
-      <h2 className="text-xl font-bold mb-6">
-        Şirket Bilgileri Ayarları (
-        {language?.toUpperCase() || "Dil seçili değil"})
-      </h2>
+    <div className="p-6 rounded-2xl dark:text-white shadow-md border border-gray-300 dark:border-gray-800 w-2/3 mx-auto hover:shadow-lg transition-shadow duration-300">
+      <h2 className="text-xl font-bold mb-6">Şirket Bilgileri Ayarları</h2>
 
       {loading ? (
         <p>Yükleniyor...</p>
@@ -58,7 +55,7 @@ const CompanyInfoSettings = () => {
           <label className="block mb-2 font-semibold">Şirket İsmi</label>
           <input
             type="text"
-            className="border border-white px-3 py-2 text-black bg-gray-50 rounded w-full mb-6 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+            className="border border-gray-400 dark:border-gray-700 dark:text-white dark:bg-gray-800 px-3 py-2 text-black bg-gray-50 rounded w-full mb-6 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
           />
@@ -67,7 +64,7 @@ const CompanyInfoSettings = () => {
             Şirket Açıklaması (Max. 200 karakter)
           </label>
           <textarea
-            className="border border-white bg-gray-50 text-black px-3 py-2 rounded w-full mb-6 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+            className="border border-gray-400 dark:bg-gray-800 dark:text-white dark:border-gray-700 text-black px-3 py-2 rounded w-full mb-6 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
             value={companyDescription}
             onChange={(e) => setCompanyDescription(e.target.value)}
             rows={4}

@@ -136,7 +136,7 @@ const ContactInfoSettings = () => {
     );
 
   return (
-    <div className="w-full mt-20 mx-auto text-white">
+    <div className="w-full mt-20 mx-auto dark:text-white">
       <h2 className="text-2xl font-bold mb-4">İletişim Bilgileri Yönetimi</h2>
       <p className="mb-6 italic">Maksimum 4 adet eklenebilir.</p>
       <div className="mb-6">
@@ -164,7 +164,7 @@ const ContactInfoSettings = () => {
           return (
             <div
               key={key}
-              className="w-full sm:w-[48%] rounded-2xl shadow-lg p-6 border border-gray-200"
+              className="w-full sm:w-[48%] rounded-2xl shadow-lg p-6 border border-gray-300 dark:border-gray-800"
             >
               <div className="flex flex-wrap items-center gap-6 mb-5">
                 <label className="font-semibold min-w-[110px] flex items-center gap-2">
@@ -172,7 +172,7 @@ const ContactInfoSettings = () => {
                   <select
                     value={info.type}
                     onChange={(e) => handleTypeChange(info.id, e.target.value)}
-                    className="ml-3 border text-white bg-[#101010] cursor-pointer border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+                    className="ml-3 border text-black dark:bg-gray-800 border-gray-300 dark:border-gray-700 dark:text-white cursor-pointer rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"
                   >
                     <option value="PHONE">Telefon</option>
                     <option value="EMAIL">Email</option>
@@ -198,7 +198,7 @@ const ContactInfoSettings = () => {
                   onChange={(e) =>
                     handleTranslationChange(info.id, "title", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                  className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white bg-gray-50 text-black rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
                 />
               </div>
 
@@ -209,7 +209,7 @@ const ContactInfoSettings = () => {
                   onChange={(e) =>
                     handleTranslationChange(info.id, "content", e.target.value)
                   }
-                  className="w-full border border-gray-300 bg-gray-50 text-black rounded-lg px-4 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                  className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white bg-gray-50 text-black rounded-lg px-4 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-red-400"
                   rows={4}
                 />
               </div>

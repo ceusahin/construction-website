@@ -96,14 +96,14 @@ const ExperienceSettings = () => {
   };
 
   return (
-    <div className="mt-16 w-full mx-auto text-white">
+    <div className="mt-16 w-full mx-auto dark:text-white">
       <h2 className="text-2xl font-bold mb-4">Tecrübe Yönetimi</h2>
       <p className="mb-6 italic">Maksimum 4 adet tecrübe eklenebilir.</p>
 
       {experiences.length < 4 && (
         <button
           onClick={handleAdd}
-          className="bg-red-500 cursor-pointer text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-950 transition"
+          className="bg-red-500 cursor-pointer text-white px-6 py-2 rounded-lg shadow-md hover:bg-[#c62121] transition"
         >
           Yeni Tecrübe Ekle
         </button>
@@ -118,7 +118,7 @@ const ExperienceSettings = () => {
           return (
             <div
               key={exp.id || index}
-              className="border rounded-2xl shadow-lg p-6 hover:shadow-xl transition cursor-default"
+              className="border dark:border-gray-800 border-gray-300 rounded-2xl shadow-lg p-6 hover:shadow-xl cursor-default"
             >
               <div className="mb-4 flex items-center justify-between">
                 <label className="font-semibold flex items-center gap-2">
@@ -138,21 +138,19 @@ const ExperienceSettings = () => {
                   onChange={(e) =>
                     handleTranslationChange(index, "numberText", e.target.value)
                   }
-                  className="w-full border border-gray-300 text-black bg-gray-50 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+                  className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white text-black bg-gray-50 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400 "
                 />
               </div>
 
               <div className="mb-6">
-                <label className="block text-gray-700 font-semibold mb-1">
-                  Metin
-                </label>
+                <label className="block font-semibold mb-1">Metin</label>
                 <input
                   type="text"
                   value={currentTrans.labelText || ""}
                   onChange={(e) =>
                     handleTranslationChange(index, "labelText", e.target.value)
                   }
-                  className="w-full border border-gray-300 text-black bg-gray-50 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+                  className="w-full border border-gray-300 dark:text-white dark:border-gray-700 dark:bg-gray-800 text-black bg-gray-50 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400 "
                 />
               </div>
 
@@ -165,7 +163,7 @@ const ExperienceSettings = () => {
                 </button>
                 <button
                   onClick={() => handleDelete(exp.id)}
-                  className="bg-red-600 text-white px-5 py-2 rounded-lg shadow-md hover:bg-red-900 cursor-pointer transition"
+                  className="bg-red-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-[#c62121] cursor-pointer transition"
                 >
                   Sil
                 </button>

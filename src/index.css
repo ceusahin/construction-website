@@ -1,7 +1,13 @@
-@import "tailwindcss"; 
-@import "slick-carousel/slick/slick.css"; 
-@import "slick-carousel/slick/slick-theme.css";
+@config "../tailwind.config.js";
+@import "tailwindcss";
 
+@theme {
+  --color-scheme: light;
+}
+
+@theme .dark {
+  --color-scheme: dark;
+}
 
 body {
   font-family: 'Montserrat', sans-serif;

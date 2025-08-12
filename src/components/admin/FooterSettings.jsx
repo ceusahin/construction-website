@@ -114,8 +114,8 @@ const FooterSettings = () => {
   };
 
   return (
-    <div className="w-2/3 mx-auto p-6 text-white rounded-2xl border border-white shadow-md hover:shadow-lg transition">
-      <h2 className="text-3xl font-bold mb-6">Footer Menü Yönetimi</h2>
+    <div className="w-2/3 mx-auto p-6 dark:text-white rounded-2xl border border-gray-300 dark:border-gray-800 shadow-md hover:shadow-lg transition">
+      <h2 className="text-xl font-bold mb-6 ">Footer Menü Yönetimi</h2>
 
       {message && (
         <div className="mb-4 p-3 bg-red-100 text-red-600 rounded select-none">
@@ -128,7 +128,7 @@ const FooterSettings = () => {
       >
         {/* Sol panel: Menü Listesi */}
         <div
-          className={`border border-white rounded-lg p-4 shadow-sm ${
+          className={`rounded-lg p-4 shadow-sm ${
             selectedMenuId ? "w-1/3" : "w-full"
           }`}
         >
@@ -176,8 +176,8 @@ const FooterSettings = () => {
                   }}
                   className={`cursor-pointer px-3 py-2 rounded-md border flex justify-between items-center transition ${
                     menu.id === selectedMenuId
-                      ? "border-red-600 bg-[#101010] font-semibold"
-                      : "border-red-500 hover:bg-[#c62121]"
+                      ? "border-red-600 bg-red-500 text-white font-semibold"
+                      : "border-red-500 hover:bg-[#c62121] hover:text-white"
                   }`}
                 >
                   <span>{menu.title}</span>
@@ -208,21 +208,19 @@ const FooterSettings = () => {
               ×
             </button>
 
-            <h3 className="text-2xl font-bold mb-6">Menü Öğeleri</h3>
+            <h3 className="text-xl font-bold mb-6">Menü Öğeleri</h3>
 
             {menuItems.length === 0 ? (
-              <p className="text-gray-500 mb-6">
-                Bu menüye ait öğe bulunmamaktadır.
-              </p>
+              <p className="mb-6">Bu menüye ait öğe bulunmamaktadır.</p>
             ) : (
               <ul className="space-y-3 max-h-80 overflow-auto mb-6">
                 {menuItems.map((item) => (
                   <li
                     key={item.id}
-                    className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded"
+                    className="flex justify-between items-center bg-gray-50 border border-gray-300 dark:bg-gray-800 dark:border-gray-700 px-4 py-3 rounded"
                   >
                     <div>
-                      <p className="font-medium text-gray-800">{item.name}</p>
+                      <p className="font-medium">{item.name}</p>
                       <p className="text-sm text-blue-600 break-all">
                         {item.url}
                       </p>
@@ -243,7 +241,7 @@ const FooterSettings = () => {
               <input
                 type="text"
                 placeholder="Öğe Adı"
-                className="border border-gray-300 rounded px-3 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="border border-gray-300 rounded px-4 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                 value={newItem.name}
                 onChange={(e) =>
                   setNewItem((prev) => ({ ...prev, name: e.target.value }))
@@ -252,7 +250,7 @@ const FooterSettings = () => {
               <input
                 type="text"
                 placeholder="URL"
-                className="border border-gray-300 rounded px-3 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                className="border border-gray-300 rounded px-4 py-2 flex-grow focus:outline-none focus:ring-2 focus:ring-red-500 transition"
                 value={newItem.url}
                 onChange={(e) =>
                   setNewItem((prev) => ({ ...prev, url: e.target.value }))
@@ -260,9 +258,9 @@ const FooterSettings = () => {
               />
               <button
                 onClick={addItem}
-                className="bg-blue-600 hover:bg-blue-700 text-white rounded px-6 py-2 transition"
+                className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white rounded px-6 py-2 transition"
               >
-                ➕ Öğeyi Ekle
+                Öğeyi Ekle
               </button>
             </div>
           </div>

@@ -14,9 +14,6 @@ import FaviconUpdater from "./components/site/FaviconUpdater";
 function App() {
   return (
     <>
-      {/* <div className="text-red-500 font-bold text-3xl p-4">
-        Eğer bu kırmızı, büyük ve kalınsa Tailwind çalışıyor demektir.
-      </div> */}
       <FaviconUpdater />
       <Routes>
         <Route path="/" element={<MainPage />} />

@@ -4,9 +4,12 @@ const RecentProjects = ({ projects }) => {
       <h3 className="text-lg font-semibold mb-4">📝 Son Eklenen Projeler</h3>
       <ul className="space-y-2">
         {projects.map((project, index) => (
-          <li key={index} className="border-b pb-2">
+          <li
+            key={index}
+            className="border border-gray-300 dark:border-gray-500 p-3 rounded-xl cursor-pointer"
+          >
             <p className="font-bold">{project.name}</p>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm">
               Başlangıç: {project.startDate} — Durum: {project.status}
             </p>
           </li>

@@ -14,13 +14,13 @@ const LanguageSelector = () => {
     <div className="flex flex-row justify-center select-none gap-2">
       <button
         onClick={() => handleChange("en")}
-        className={`p-2 cursor-pointer flex flex-row items-center border w-11 justify-center text-sm font-medium ${
+        className={`px-10 py-2 cursor-pointer flex flex-row items-center border w-11 justify-center text-sm font-medium ${
           language === "en"
             ? "border-red-500 text-white bg-red-500"
             : "border-red-500 text-white hover:bg-red-500"
         } focus:outline-none rounded`}
       >
-        <span className="text-md">EN</span>
+        <span className="text-md">English</span>
         <span className="ml-1">
           {/* <img
             src="https://img.icons8.com/?size=512&id=t3NE3BsOAQwq&format=png"
@@ -32,13 +32,13 @@ const LanguageSelector = () => {
 
       <button
         onClick={() => handleChange("tr")}
-        className={`cursor-pointer p-2 flex flex-row items-center border w-11 justify-center text-sm font-medium ${
+        className={`cursor-pointer px-10 flex flex-row items-center border w-11 justify-center text-sm font-medium ${
           language === "tr"
             ? "border-red-500 text-white bg-red-500"
             : "border-red-500 text-white hover:bg-red-500"
         } focus:outline-none rounded`}
       >
-        <span className="text-md">TR</span>
+        <span className="text-md">Türkçe</span>
         <span className="ml-1">
           {/* <img
             src="https://img.icons8.com/?size=512&id=7PhX5XSLeDb9&format=png"
